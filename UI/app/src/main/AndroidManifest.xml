@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.demo.ui">
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ActMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.dispatch.ActClickDispatch" />
+        <activity android:name=".module.xy.ActXY" />
+        <activity android:name=".module.scroll.ActSmoothScroll" />
+        <activity android:name=".module.gesture.ActGesture" />
+        <activity android:name=".module.scroll.ActOtherSmoothScroll" />
+        <activity android:name=".module.conflict.ActScrollConflict" />
+        <activity android:name=".module.customize.ActCustomizeView" />
+        <activity android:name=".module.remoteview.ActRemoteView" />
+        <activity
+            android:name=".module.remoteview.ActRemoteViewJump"
+            android:process=":remote" />
+        <activity android:name=".module.drawable.ActDrawable" />
+        <activity
+            android:name=".module.anim.ActAnim"
+            android:theme="@style/AnimTheme" />
+        <activity
+            android:name=".module.anim.ActAnimJump"
+            android:theme="@style/AnimTheme" />
+
+        <receiver
+            android:name=".module.remoteview.MyAppWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider_info" />
+        </receiver>
+
+    </application>
+
+</manifest>

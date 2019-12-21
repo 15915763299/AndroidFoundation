@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.demo.ipc">
+
+    <!--这个permission限制只针对跨进程的情况-->
+    <permission
+        android:name="com.ipc.permission.ACCESS_BOOK_SERVICE"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.ipc.permission.ACCESS_BOOK_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--Activity-->
+        <activity android:name=".ActMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".use.bundle.ActUseBundle" />
+        <activity android:name=".use.file.ActUseFile" />
+        <activity
+            android:name=".use.file.ActUseFileRemote"
+            android:process=":remote" />
+        <activity android:name=".use.messenger.ActUseMessenger" />
+        <activity android:name=".use.aidl.ActBookManager" />
+        <activity android:name=".use.provider.ActUseProvider" />
+        <activity
+            android:name=".use.provider.ActUseProviderRemote"
+            android:process=":remote" />
+        <activity android:name=".use.socket.ActUseSocket" />
+        <activity android:name=".use.binderpool.client.ActBinderPool" />
+
+
+        <!--Service-->
+        <service
+            android:name=".use.bundle.SerUseBundleRemote"
+            android:process=":remote" />
+        <service
+            android:name=".use.messenger.SerUseMessengerRemote"
+            android:exported="false"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="android.intent.action.USE_MESSENGER" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".use.aidl.SerBookManager"
+            android:exported="false"
+            android:permission="com.ipc.permission.ACCESS_BOOK_SERVICE"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="android.intent.action.USE_AIDL" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".use.socket.SerUseSocketRemote"
+            android:process=":remote" />
+        <service
+            android:name=".use.binderpool.server.SerBinderPool"
+            android:exported="false"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="android.intent.action.BINDERPOOL" />
+            </intent-filter>
+        </service>
+
+        <!--Provider-->
+        <provider
+            android:name=".use.provider.Provider"
+            android:authorities="${applicationId}"
+            android:exported="false" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

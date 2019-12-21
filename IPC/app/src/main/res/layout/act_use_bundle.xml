@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="在A进程的ActUseBundle将信息传递给在B进程的SerRemote（IntentService）处理，然后通过广播回传展示"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/edt_start"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="number"
+        android:text="0" />
+
+    <EditText
+        android:id="@+id/edt_end"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:inputType="number"
+        android:text="10" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:text="start"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tx"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
