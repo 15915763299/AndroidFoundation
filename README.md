@@ -1,5 +1,5 @@
 # AndroidFoundation
-Android基础知识回顾，以《安卓艺术探索》逐个知识点复习，运行手机为三星Galaxy Note8，Android版本为9。
+Android基础知识回顾，以《安卓艺术探索》为基础逐个知识点复习，运行手机为三星Galaxy Note8，Android版本为9。
 ### IPC
 IPC（Inter-Process Communication）进程间通信简单代码示例
 > ![IPC](/Picture/IPC.jpg "部分截图")
