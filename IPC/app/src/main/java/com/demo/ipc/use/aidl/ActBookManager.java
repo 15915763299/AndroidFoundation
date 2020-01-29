@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.ipc.App;
@@ -134,6 +135,8 @@ public class ActBookManager extends AppCompatActivity implements View.OnClickLis
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         adapter = new BookAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
+        TextView tx;
+        tx.setText();
     }
 
     @Override
