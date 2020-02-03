@@ -9,9 +9,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.demo.threadandcache.App;
 import com.demo.threadandcache.R;
 
 /**
@@ -34,6 +36,11 @@ public class ActIntentService extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
             Log.d(Thread.currentThread().getName(), msg.obj + " done");
+            Toast.makeText(
+                    App.getApp(),
+                    "ThreadName-" + Thread.currentThread().getName() + ": " + msg.obj + " done",
+                    Toast.LENGTH_LONG
+            ).show();
         }
     }
 

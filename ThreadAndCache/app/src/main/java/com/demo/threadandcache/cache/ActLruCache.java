@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 
 import com.demo.threadandcache.R;
 
+import java.util.Locale;
+
 /**
  * @author 尉迟涛
  * create time : 2020/2/2 10:05
@@ -82,7 +84,17 @@ public class ActLruCache extends Activity implements View.OnClickListener {
 //        String result = "maxMemory: " + runtime.maxMemory() / 1024 + "\n" +
 //                "freeMemory: " + runtime.freeMemory() / 1024 + "\n" +
 //                "totalMemory: " + runtime.totalMemory() / 1024;
-        tx.setText(lruCache.toString());
+
+        int hitCount = lruCache.hitCount();
+        int missCount = lruCache.missCount();
+        int accesses = hitCount + missCount;
+        int hitPercent = accesses != 0 ? (100 * hitCount / accesses) : 0;
+        String tip = String.format(
+                Locale.CHINA,
+                "maxSize=%d\nhits=%d\nmisses=%d\nhitRate=%d%%",
+                lruCache.maxSize(), hitCount, missCount, hitPercent
+        );
+        tx.setText(tip);
     }
 
     private void initCache() {

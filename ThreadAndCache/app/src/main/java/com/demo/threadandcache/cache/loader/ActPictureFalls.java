@@ -59,7 +59,6 @@ public class ActPictureFalls extends Activity {
         });
     }
 
-
     private ArrayList<String> getData() {
         String[] imageUrls = {
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580670371978&di=5a5ae5fc72cdae7510f23ef25b936c0b&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180518%2Fb06b0251a4cc4e2cae3c24a21f05fc65.png",

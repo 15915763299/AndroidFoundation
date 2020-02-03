@@ -62,7 +62,7 @@ public class PicFallGlideAdapter extends RecyclerView.Adapter<PicFallGlideAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String url = data.get(i);
         boolean isLoaded = (boolean) viewHolder.img.getTag(R.id.glide_tag);
-        if (isIdleOrDragging || isLoaded) {
+        if (!isIdleOrDragging || isLoaded) {
             Glide.with(context).pauseRequests();
         } else {
             Glide.with(context).resumeRequests();

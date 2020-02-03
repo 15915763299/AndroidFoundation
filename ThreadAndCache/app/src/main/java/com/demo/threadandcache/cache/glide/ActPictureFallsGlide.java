@@ -46,6 +46,8 @@ public class ActPictureFallsGlide extends Activity {
         rv.setItemAnimator(null);
         rv.addItemDecoration(new StaggeredDividerItemDecoration(this, 5));
         rv.addOnScrollListener(adapter.getScrollerListener());
+        //20个Item的缓存，不加这个的效果，请看ActPictureFalls
+        rv.setItemViewCacheSize(20);
 
         SmartRefreshLayout srl = findViewById(R.id.srl);
         //设置下拉刷新和上拉加载监听
@@ -57,7 +59,6 @@ public class ActPictureFallsGlide extends Activity {
             }, 2000);
         });
     }
-
 
     private ArrayList<String> getData() {
         String[] imageUrls = {
@@ -75,7 +76,13 @@ public class ActPictureFallsGlide extends Activity {
                 "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3364607806,1706241344&fm=26&gp=0.jpg",
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580672669231&di=623ec09fdda23665c2d78de744269e41&imgtype=0&src=http%3A%2F%2Fupload.iceo.com.cn%2F4%2F2f%2F1288946872497.jpg",
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580672708078&di=1e0ae40f693cc4cd70fe58a58e74d12d&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F3511d234a4c30e9e7988a2377a7aa88d95761e743cf8e-kQf4ZO_fw658",
-                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580672708078&di=a67ca8017d6bb266b4046d21bd9bb7cb&imgtype=0&src=http%3A%2F%2Fi-7.vcimg.com%2Ftrim%2Fd22345c20b4f60f6ead694fea28b4327874495%2Ftrim.jpg"
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580672708078&di=a67ca8017d6bb266b4046d21bd9bb7cb&imgtype=0&src=http%3A%2F%2Fi-7.vcimg.com%2Ftrim%2Fd22345c20b4f60f6ead694fea28b4327874495%2Ftrim.jpg",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580740601326&di=7e578fc5cb4f82dbc5a58e1c5c408dbb&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw792h519%2F20180305%2Fcf1e-fxipenn3219504.png",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580740601324&di=7a51fa0ac6b7c17a5e8ac635ec21abb3&imgtype=0&src=http%3A%2F%2Fbig5.taiwan.cn%2Fgate%2Fbig5%2Fimg1.gtimg.com%2Fent%2Fpics%2Fhv1%2F109%2F242%2F1315%2F85569694.jpg",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580740601323&di=fc17456521e2eb1f6077309d3a6918de&imgtype=0&src=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F87f93afdb873a333751f46c08edfabdb2dad542f.jpg",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580740601308&di=be88e13790c5e492c86aa1122dbc689e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fbaike%2Fpic%2Fitem%2F50da81cb39dbb6fdb3393fb30224ab18962b37c1.jpg",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580740601307&di=11e886c1cccb0d8ec694099bbbc8054e&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2F9019f0e0bfed7f2d4924225556a2dba89ac73b35.jpg",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580740698286&di=6e64fac843ccd69bd36d195b425e8f9d&imgtype=0&src=http%3A%2F%2Fpics5.baidu.com%2Ffeed%2F5366d0160924ab18c4848662414e20c97a890b09.jpeg%3Ftoken%3De0e7c7d0a21b059dd63d84440dfe2aaf%26s%3DE7449B4776EB835D5AD0C0890300F081"
         };
         ArrayList<String> urList = new ArrayList<>();
         Collections.addAll(urList, imageUrls);

@@ -22,7 +22,9 @@ public class SerIntentService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             SystemClock.sleep(3000);
-            Log.d(Thread.currentThread().getName(), intent.getStringExtra("data") + " done");
+            String data = intent.getStringExtra("data");
+
+            Log.d(Thread.currentThread().getName(), data + " done");
         }
     }
 }
