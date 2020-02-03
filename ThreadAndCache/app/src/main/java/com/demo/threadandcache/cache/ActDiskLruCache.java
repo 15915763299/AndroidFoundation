@@ -5,10 +5,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import androidx.annotation.Nullable;
 
 import com.demo.threadandcache.R;
 import com.demo.threadandcache.Utils;

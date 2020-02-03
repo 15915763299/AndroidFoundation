@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.demo.threadandcache.cache.ActDiskLruCache;
 import com.demo.threadandcache.cache.ActLruCache;
+import com.demo.threadandcache.cache.glide.ActPictureFallsGlide;
 import com.demo.threadandcache.cache.loader.ActPictureFalls;
 import com.demo.threadandcache.thread.ActAsyncTask;
 import com.demo.threadandcache.thread.ActIntentService;
@@ -34,6 +36,7 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
         findViewById(R.id.btn5).setOnClickListener(this);
+        findViewById(R.id.btn6).setOnClickListener(this);
 
         getDirTest();
     }
@@ -57,6 +60,9 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btn5:
                 clzz = ActPictureFalls.class;
+                break;
+            case R.id.btn6:
+                clzz = ActPictureFallsGlide.class;
                 break;
             default:
                 clzz = null;

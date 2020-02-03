@@ -1,4 +1,4 @@
-package com.demo.threadandcache.cache.loader;
+package com.demo.threadandcache.cache.glide;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.demo.threadandcache.R;
+import com.demo.threadandcache.cache.loader.StaggeredDividerItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -20,20 +21,18 @@ import java.util.Collections;
  * @author 尉迟涛
  * create time : 2020/2/2 20:38
  * description : RecycleView 参考 https://www.jianshu.com/p/4e142909b824
- *
- * 还有需要优化的地方
  */
-public class ActPictureFalls extends Activity {
+public class ActPictureFallsGlide extends Activity {
 
     public static final int SPAN_COUNT = 2;
-    private PicFallAdapter adapter;
+    private PicFallGlideAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_picture_falls);
 
-        adapter = new PicFallAdapter(this, getData());
+        adapter = new PicFallGlideAdapter(this, getData());
         RecyclerView rv = findViewById(R.id.rv);
         rv.setAdapter(adapter);
 

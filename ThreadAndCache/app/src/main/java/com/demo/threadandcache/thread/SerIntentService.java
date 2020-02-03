@@ -3,8 +3,9 @@ package com.demo.threadandcache.thread;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author 尉迟涛

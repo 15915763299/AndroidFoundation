@@ -2,5 +2,6 @@
 <resources>
 
     <item name="imageloader_uri" type="id"/>
+    <item name="glide_tag" type="id"/>
 
 </resources>

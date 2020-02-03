@@ -28,6 +28,7 @@
         <activity android:name=".cache.ActLruCache" />
         <activity android:name=".cache.ActDiskLruCache" />
         <activity android:name=".cache.loader.ActPictureFalls" />
+        <activity android:name=".cache.glide.ActPictureFallsGlide" />
 
         <service android:name=".thread.SerIntentService" />
     </application>
