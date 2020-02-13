@@ -1,5 +1,6 @@
 package com.demo.threadandcache;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -83,19 +84,36 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
         Log.d(TAG, "----------------------------");
         // /data
         // /data/cache
-        // /storage/emulated/0
-        // /storage/emulated/0/Download
         // /system
-        // /storage/emulated/0/Android/data/com.demo.threadandcache/cache
-        // /storage/emulated/0/Android/data/com.demo.threadandcache/files/Pictures
         logFilePath(Environment.getDataDirectory());
         logFilePath(Environment.getDownloadCacheDirectory());
+        logFilePath(Environment.getRootDirectory());
+
+        // /data/user/0/com.demo.threadandcache/cache
+        // /data/user/0/com.demo.threadandcache/files
+        logFilePath(getCacheDir());
+        logFilePath(getFilesDir());
+
+        logFilePath(getDatabasePath("test"));
+        ///data/user/0/com.demo.threadandcache/app_test
+        logFilePath(getDir("test", Context.MODE_PRIVATE));
+
+        // /data/app/com.demo.threadandcache-Axlv4uVYpywaF83zfiFmEQ==/base.apk
+        // /data/app/com.demo.threadandcache-Axlv4uVYpywaF83zfiFmEQ==/base.apk
+        Log.d(TAG, getPackageCodePath());
+        Log.d(TAG, getPackageResourcePath());
+        Log.d(TAG, "----------------------------");
+
+        // /storage/emulated/0
+        // /storage/emulated/0/Download
         logFilePath(Environment.getExternalStorageDirectory());
         logFilePath(file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
-        logFilePath(Environment.getRootDirectory());
+
+        // /storage/emulated/0/Android/data/com.demo.threadandcache/cache
+        // /storage/emulated/0/Android/data/com.demo.threadandcache/files/Pictures
         logFilePath(getExternalCacheDir());
         logFilePath(getExternalFilesDir(Environment.DIRECTORY_PICTURES));
-
+        Log.d(TAG, "----------------------------");
 
         // getFreeSpace():空闲空间
         // getUsableSpace():可用空间
