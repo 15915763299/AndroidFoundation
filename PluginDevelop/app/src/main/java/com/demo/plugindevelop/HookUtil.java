@@ -6,11 +6,9 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.view.KeyEventDispatcher;
 import android.util.Log;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.List;
 /**
  * @author 尉迟涛
  * create time : 2020/2/13 15:20
- * description : 基于 Android 9.0
+ * description : 基于 Android 9.0，适配6.0至9.0
  */
 public class HookUtil {
 
@@ -27,9 +25,17 @@ public class HookUtil {
 
     public static void hookAms(final String packageName, final String className) {
         try {
-            // 获取 ActivityManager 中的 IActivityManagerSingleton
-            Class<?> clazz = Class.forName("android.app.ActivityManager");
-            Field singletonField = clazz.getDeclaredField("IActivityManagerSingleton");
+            Field singletonField;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // 获取 ActivityManager 中的 IActivityManagerSingleton
+                Class<?> clazz = Class.forName("android.app.ActivityManager");
+                singletonField = clazz.getDeclaredField("IActivityManagerSingleton");
+            } else {
+                // 8.0 以前是 ActivityManagerNative 中的 gDefault
+                Class<?> clazz = Class.forName("android.app.ActivityManagerNative");
+                singletonField = clazz.getDeclaredField("gDefault");
+            }
+
             singletonField.setAccessible(true);
             // IActivityManagerSingleton
             Object singleton = singletonField.get(null);

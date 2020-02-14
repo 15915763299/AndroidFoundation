@@ -12,8 +12,11 @@ IPC（Inter-Process Communication）进程间通信简单代码示例
 Android中常见的多线程的使用方式、缓存的使用
 
 ### 4、PluginDevelop
-插件化原理分析及实践代码，使用 Android Studio 自带模拟器运行，基于9.0的代码
+插件化原理分析及实践代码，使用 Android Studio 自带模拟器运行，适配6.0+
 
-### 5、源码逻辑梳理
+### 5、MusicPlayer
+简易的音乐播放器，展示动态注册BroadcastReceiver与同进程内的Binder通讯
+
+### 6、源码逻辑梳理
 四大组件的执行逻辑以及部分源码的逻辑梳理，基于Android 10.0.0_r6，下面是 Activity 逻辑分析截图
 > ![UI](/0-Picture/Activity.png "Activity逻辑梳理截图")
