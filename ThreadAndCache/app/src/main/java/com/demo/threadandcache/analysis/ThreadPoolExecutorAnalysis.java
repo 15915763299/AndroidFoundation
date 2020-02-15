@@ -1,4 +1,4 @@
-package com.demo.threadandcache.thread;
+package com.demo.threadandcache.analysis;
 
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -13,9 +13,18 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author 尉涛
  * @date 2020-02-01 16:26
  **/
-public class ThreadPoolExecutorTest {
+public class ThreadPoolExecutorAnalysis {
 
     public static void main(String[] args) throws IOException {
+//        // 线程数量固定的线程池
+//        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
+//        // 只有非核心线程的线程池
+//        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+//        // 核心线程数固定、非核心线程数无限制
+//        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
+//        // 只有一个核心线程，顺序执行
+//        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+
         int corePoolSize = 2;
         int maximumPoolSize = 4;
         long keepAliveTime = 10;
@@ -25,12 +34,13 @@ public class ThreadPoolExecutorTest {
         ThreadFactory threadFactory = new NameTreadFactory();
         RejectedExecutionHandler handler = new MyRejectPolicy();
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(
-                corePoolSize, maximumPoolSize, keepAliveTime, unit,
-                workQueue, threadFactory, handler
-        );
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
         executor.prestartAllCoreThreads(); // 预启动所有核心线程
 
+        // 核心线程2个，最大线程4个，阻塞队列长度为2
+        // 瞬间运行 10 个，每个执行时长超过全部这个“瞬间”的时长
+        // 前4个正常运行，阻塞2个，剩下4个被拒绝
+        // 你会观察到会有2个被阻塞的任务的log稍晚于前面8个任务的log打出
         for (int i = 1; i <= 10; i++) {
             MyRunnableTask task = new MyRunnableTask(String.valueOf(i));
             executor.execute(task);
