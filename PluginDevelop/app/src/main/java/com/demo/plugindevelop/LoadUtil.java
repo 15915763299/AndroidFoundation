@@ -1,12 +1,12 @@
 package com.demo.plugindevelop;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.os.Environment;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.lang.reflect.Method;
 
 import dalvik.system.DexClassLoader;
 
@@ -72,7 +72,35 @@ public class LoadUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+
+    /**
+     * 创建一个Resources给插件使用
+     * <p>
+     * 我们通过ContextImpl获取Resources
+     * 创建Activity或Application的时候创建了ContextImpl
+     * <p>
+     * 对于Activity，在ActivityThread进行创建
+     * ActivityThread会创建ContextImpl
+     * ContextImpl又让ResourcesManager创建Resources
+     * Resources的创建依赖于ResourcesImpl的创建
+     * 最终发现可以通过Resource的一个构造方法来创建Resource：
+     * public Resources(AssetManager assets, DisplayMetrics metrics, Configuration config)
+     */
+    public static Resources loadResources(Context context) {
+        try {
+            AssetManager assetManager = AssetManager.class.newInstance();
+            final Method addAssetPath = assetManager.getClass().getDeclaredMethod("addAssetPath", String.class);
+            addAssetPath.setAccessible(true);
+            addAssetPath.invoke(assetManager, PLUGIN_PATH);
+
+            Resources resources = context.getResources();
+            return new Resources(assetManager, resources.getDisplayMetrics(), resources.getConfiguration());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

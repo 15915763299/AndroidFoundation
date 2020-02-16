@@ -5,16 +5,15 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.lang.reflect.Method;
-import java.security.Permission;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 加载静态插件，需要将插件 apk 放置到 LoadUtil 中的指定路径下
+     * 加载静态插件
+     * 需要将插件 apk 放置到 LoadUtil 中的指定路径下
      */
     private void loadStaticPlugin() {
         Log.e(TAG, "loadStaticPlugin");
@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 加载插件中的 Activity，需要将插件 apk 放置到 LoadUtil 中的指定路径下
+     * 加载插件中的 Activity
+     * 需要将插件 apk 放置到 LoadUtil 中的指定路径下
+     * 记得加载 Resources， LoadUtil.loadResources(this);
      */
     private void loadPluginActivity() {
         String packageName = "com.demo.plugin";
