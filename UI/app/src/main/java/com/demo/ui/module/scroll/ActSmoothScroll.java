@@ -17,7 +17,7 @@ import com.demo.ui.listener.OnLogListener;
  * description : 惯性滑动实现（Scroller + VelocityTracker）
  */
 public class ActSmoothScroll extends AppCompatActivity implements
-        OnLogListener, View.OnClickListener, OnScrollListener {
+        OnLogListener, View.OnClickListener, OnScrollListener, View.OnLayoutChangeListener {
 
     private TextView tx, tx_detail;
     private SmoothScrollView smooth_scroll_view;
@@ -36,9 +36,12 @@ public class ActSmoothScroll extends AppCompatActivity implements
         smooth_scroll_view = findViewById(R.id.smooth_scroll_view);
         smooth_scroll_view.setOnLogListener(this);
         smooth_scroll_view.setScrollListener(this);
+        smooth_scroll_view.addOnLayoutChangeListener(this);
         findViewById(R.id.btn_clear).setOnClickListener(this);
         findViewById(R.id.btn_set).setOnClickListener(this);
         findViewById(R.id.btn_other_impl).setOnClickListener(this);
+
+        tx.post(() -> tx.setText(sb.toString()));
     }
 
     @Override
@@ -86,4 +89,8 @@ public class ActSmoothScroll extends AppCompatActivity implements
         tx_detail.setText(scrollX + "\n" + scrollLengthX + "\n" + endX + "\n" + viewOffset);
     }
 
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        log("onLayoutChange");
+    }
 }

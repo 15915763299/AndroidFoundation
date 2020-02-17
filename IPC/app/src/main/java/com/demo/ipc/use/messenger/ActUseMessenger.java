@@ -53,6 +53,12 @@ public class ActUseMessenger extends AppCompatActivity {
         }
     }
 
+    // Handler 属于 TLS(Thread Local Storage) 变量, 生命周期和 Activity 是不一致的。
+    // 所以很有可能我们的Activity的逻辑早就结束了，但是Handler持有Activity的引用导致Activity的资源无法回收。
+    // Handler 持有 Looper，Lopper被 ThreadLocal 持有
+
+    // IMessenger 的实现是 Handler 的内部类，它实现了send方法，给初始化的Handler发送信息
+
     private Messenger clientMessenger = new Messenger(new ClientHandler(this));
     private TextView tx;
 
