@@ -23,5 +23,8 @@ public class ClickInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         return clickMethod.invoke(context, args);
+        // 这里的 method 是 onClick 或 onLongClick，这里做了替换，换成了clickMethod，它是Activity内的方法
+        // 所以这里不是纯粹的动态代理，而是做了代理并替换方法
+//        return method.invoke(context, args);
     }
 }

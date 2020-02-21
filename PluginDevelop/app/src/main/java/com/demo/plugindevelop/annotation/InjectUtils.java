@@ -56,6 +56,7 @@ public class InjectUtils {
 
                         // 这里不直接生成监听接口对象，因为具体内容需要在activity中执行
                         // 所以使用动态代理
+                        // 这里不是纯粹的动态代理，而是做了代理并替换方法，具体原因看Handler的实现
                         ClickInvocationHandler cih = new ClickInvocationHandler(context, method);
                         Object proxy = Proxy.newProxyInstance(
                                 interfaceClass.getClassLoader(),

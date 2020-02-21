@@ -17,7 +17,7 @@ Android中常见的多线程的使用方式、缓存的使用，并对一些常�
 > 你会观察到会有2个被阻塞的任务的log稍晚于前面8个任务的log打出
 
 ### 4、PluginDevelop
-插件化原理分析及实践代码，以及简单的自定义注解实现，使用 Android Studio 自带模拟器运行，适配6.0+
+插件化原理分析，自定义注解实现，动态代理深入分析，使用 Android Studio 自带模拟器运行，适配6.0+
 
 ### 5、MusicPlayer
 简易的音乐播放器，展示动态注册BroadcastReceiver与同进程内的Binder通讯
