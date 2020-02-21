@@ -52,14 +52,14 @@ public class ActBinderPool extends AppCompatActivity implements View.OnClickList
     }
 
     private void getEncryptBinder() {
-        BinderPool binderPool = BinderPool.getInsance(this);
+        BinderPool binderPool = BinderPool.getInstance(this);
         IBinder encryptBinder = binderPool.queryBinder(BinderConstant.BINDER_ENCRYPT);
         iEncrypt = IEncrypt.Stub.asInterface(encryptBinder);
         runOnUiThread(() -> btn1.setEnabled(true));
     }
 
     private void getSortBinder() {
-        BinderPool binderPool = BinderPool.getInsance(this);
+        BinderPool binderPool = BinderPool.getInstance(this);
         IBinder sortBinder = binderPool.queryBinder(BinderConstant.BINDER_SORT);
         iSort = ISort.Stub.asInterface(sortBinder);
         runOnUiThread(() -> btn2.setEnabled(true));

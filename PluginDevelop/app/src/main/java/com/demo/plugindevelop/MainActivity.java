@@ -11,11 +11,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
+import com.demo.plugindevelop.annotation.ActAnnotation;
 
 import java.lang.reflect.Method;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 100;
@@ -25,12 +28,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.btn1).setOnClickListener(this);
+        findViewById(R.id.btn2).setOnClickListener(this);
+
         // Boot
         Log.e(TAG, "Activity: " + Activity.class.getClassLoader());
         // Path
         Log.e(TAG, "AppCompatActivity: " + AppCompatActivity.class.getClassLoader());
+    }
 
-        requestPermission();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn1:
+                requestPermission();
+                break;
+            case R.id.btn2:
+                Intent intent = new Intent(this, ActAnnotation.class);
+                startActivity(intent);
+                break;
+            default:
+        }
     }
 
     private void requestPermission() {
