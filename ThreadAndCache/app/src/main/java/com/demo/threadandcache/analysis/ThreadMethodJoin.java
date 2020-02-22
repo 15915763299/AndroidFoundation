@@ -11,6 +11,20 @@ package com.demo.threadandcache.analysis;
  * 会调用线程自身的notifyAll()方法，会通知所有等待在该线程对象上的线程
  * <p>
  * 参考：https://blog.csdn.net/chenkaibsw/article/details/80912878
+ * <p>
+ * !!!!!
+ * 对于Android，jion方法是synchronize一个内部对象，而纯Java的项目中是synchronize方法：
+ * public final synchronized void join(long millis)
+ * throws InterruptedException {...}
+ * !!!!
+ * 这是同步代码块和同步方法的区别
+ * 安卓设备处理能力不如服务器，性能要求更高，对代码性能要求也就更高
+ *
+ *     /**
+ *      * The synchronization object responsible for this thread's join/sleep/park operations.
+ *      *
+ *      private final Object lock=new Object();
+ *      这是专门给 join/sleep/park 用的锁，为了提高性能才独立出来
  */
 public class ThreadMethodJoin {
 

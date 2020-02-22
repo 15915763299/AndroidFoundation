@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 按照计算出的下标存入当前线程的 ThreadLocalMap 对象中的一个数组
  * （每个线程会维护一个 ThreadLocalMap 对象）
  * 如果新的 ThreadLocal 键值对下标与数组中的发生了“碰撞”则 rehash（double size）
+ * （生成的下标很神奇的的不会重复直到数组被填满）
  * <p>
  * Entry 使用了 WeakReference 弱应用，被弱引用关联的对象实例只能生存到下一次垃圾收集发生之前
  * 当 ThreadLocal 没有任何强引用的时候，Entry内的弱引用便会被回收，同时 ThreadLocal 也被回收。

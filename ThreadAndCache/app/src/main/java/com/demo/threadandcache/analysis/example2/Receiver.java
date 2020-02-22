@@ -1,4 +1,4 @@
-package com.demo.threadandcache.analysis.example;
+package com.demo.threadandcache.analysis.example2;
 
 /**
  * @author 尉迟涛
@@ -18,17 +18,15 @@ public class Receiver implements Runnable {
         }
 
         for (String receivedMessage = transmitter.receive();
-             !"End".equals(receivedMessage);
+             !Main.END.equals(receivedMessage);
              receivedMessage = transmitter.receive()) {
 
-            System.err.println(receivedMessage);
+            System.out.println(receivedMessage);
             try {
-                long time = Main.randomTime(2000, 5000);
-                System.out.println("Receiver wait: " + time);
+                long time = Main.randomTime(1000, 3000);
                 Thread.sleep(time);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                // 捕获到interrupt后，interrupt会被重置，需要再调用interrupt
                 Thread.currentThread().interrupt();
                 break;
             }

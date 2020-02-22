@@ -204,4 +204,22 @@ public class KeyWordSynchronize {
             System.out.println("Method 2 end");
         }
     }
+
+
+    // 1、public synchronized void method(){}
+    //
+    // 2、private Object object = new Object();
+    //    public method(){
+    //          synchronized(object){}
+    //    }
+    //
+    // 3、public method(){
+    //          synchronized(this){}
+    //    }
+    // 以上三者效果基本相同，1/3完全相同
+
+    // public static synchronized a(){}
+    // 这是锁了Class的对象
+
+    // synchronized 代码块执行完了才会释放锁，notify只是唤醒线程
 }

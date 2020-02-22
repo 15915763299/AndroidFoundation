@@ -22,6 +22,13 @@ public class Main {
 
         sender.start();
         receiver.start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sender.interrupt();
     }
 
     public static int randomTime(int min, int max) {

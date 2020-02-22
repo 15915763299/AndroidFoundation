@@ -10,6 +10,8 @@ package com.demo.threadandcache.analysis.example;
  *
  *  wait会释放锁，等到其他线程调用notify方法时再继续运行。
  *  但是一定要持有锁，才能wait。
+ *
+ *  Transmitter对象作为锁
  */
 class Transmitter {
     private String packet;
@@ -23,19 +25,19 @@ class Transmitter {
      * @param packet 信息
      */
     synchronized void send(String packet) {
-        System.out.println("send");
+        System.out.println("sender 获取了锁");
         while (transferring) {
+            System.out.println("上一个正在传输中，等待");
             try {
                 wait();// 这个wait阻塞了发送线程，直到接收线程执行完接收后，会将它notify
             } catch (InterruptedException e) {
                 e.printStackTrace();
-//                Thread.currentThread().interrupt();
-//                Log.e(TAG, "Thread interrupted", e);
+                Thread.currentThread().interrupt();
             }
         }
-        transferring = true;
-        System.out.println("transferring = true");
 
+        System.out.println("传输完成，发送新的传输数据，继续传输");
+        transferring = true;
         this.packet = packet;
         notifyAll();
     }
@@ -46,19 +48,19 @@ class Transmitter {
      * @return 信息
      */
     synchronized String receive() {
-        System.out.println("receive");
+        System.out.println("receiver 获取了锁");
         while (!transferring) {
+            System.out.println("上一个传输已完成，等待");
             try {
                 wait(); // 这个wait阻塞了接收线程，直到发送线程执行完发送后，会将它notify
             } catch (InterruptedException e) {
                 e.printStackTrace();
-//                Thread.currentThread().interrupt();
-//                Log.e(TAG, "Thread interrupted", e);
+                Thread.currentThread().interrupt();
             }
         }
-        transferring = false;
-        System.out.println("transferring = false");
 
+        System.out.println("获取到下一个传输，执行获取程序");
+        transferring = false;
         notifyAll();
         return packet;
     }

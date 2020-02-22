@@ -46,6 +46,7 @@ public class ThreadMethodInterrupt {
         }
         interruptThread.interrupt();
         // 结果：java.lang.InterruptedException: sleep interrupted
+        // 但是！！这个时候线程并没有终止
 
 
         // 单独调用interrupt()方法不能中断正在运行过程中的线程，只能中断阻塞过程中的线程。
@@ -64,10 +65,17 @@ public class ThreadMethodInterrupt {
     private static class InterruptThread extends Thread {
         @Override
         public void run() {
-            while (true) {
+            while (!isInterrupted()) {
+//            while (!Thread.interrupted()) {// 这个方法时检查并清除打断（重置为false）这里用isInterrupted就好了
+                System.out.println("Thread is running");
+                System.out.println("Interrupt flag: " + isInterrupted());
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
+                    // sleep被interrupt后会重置标志位为false
+                    System.out.println("Interrupt flag: " + isInterrupted());
+                    // 加上这句话才会真正终止
+                    interrupt();
                     e.printStackTrace();
                 }
             }
@@ -86,5 +94,19 @@ public class ThreadMethodInterrupt {
             System.out.println(System.currentTimeMillis() - start);
         }
     }
+
+    // 正确写法：
+    // while (!isInterrupted()) {...}
+
+    //     * Tests whether the current thread has been interrupted.  The
+    //     * <i>interrupted status</i> of the thread is cleared by this method.  In
+    //     * other words, if this method were to be called twice in succession, the
+    //     * second call would return false (unless the current thread were
+    //     * interrupted again, after the first call had cleared its interrupted
+    //     * status and before the second call had examined it).
+    // public static native boolean interrupted();
+    // Thread.interrupted() 会清除打断，将其重置为false
+
+    // ！！！调用 非静态 interrupt() 方法只是将标识位设置成了true，至于停止与否，要看任务的具体实现
 
 }
