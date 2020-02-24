@@ -22,6 +22,10 @@ Android中常见的多线程的使用方式、缓存的使用，并对一些常�
 ### 5、MusicPlayer
 简易的音乐播放器，展示动态注册BroadcastReceiver与同进程内的Binder通讯
 
-### 6、源码逻辑梳理
+### 6、LazyLoad
+真正的懒加载，只加载当前显示的Fragment，Fragment移出则立即进行资源释放，解决嵌套ViewPager的Fragment的懒加载问题，
+使用FragmentStatePagerAdapter，适配两种模式（BEHAVIOR_SET_USER_VISIBLE_HINT与BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT）
+
+### 7、源码逻辑梳理
 framework层部分代码、okhttp、glide等开源框架逻辑梳理。framework 基于Android 10.0.0_r6，下面是 Activity 逻辑分析截图
 > ![UI](/0-Picture/Activity.png "Activity逻辑梳理截图")

@@ -9,6 +9,9 @@ import com.demo.plugindevelop.proxy.impl.SmallFactory;
  * @author 尉迟涛
  * create time : 2020/2/21 22:38
  * description :
+ *
+ * 静态代理一句话：实现接口并持有接口的一个实例对象
+ * 静态代理只能一对一，动态代理可以一对多
  */
 public class Main {
 

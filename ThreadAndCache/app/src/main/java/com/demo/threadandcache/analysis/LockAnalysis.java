@@ -11,6 +11,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * description :
  * <p>
  * 对Lock的说明：https://www.cnblogs.com/wuhan729/p/8601108.html
+ *
+ * lock.newCondition();可以获取 ondition 对象，可以实现 wait 和 notify
+ * 一个lock可以生成多个condition实例，可以根据业务分多个condition，condition的唤醒，少用singalall
  */
 public class LockAnalysis {
 

@@ -59,12 +59,21 @@ public class MyShop implements InvocationHandler {
 
     // 使用缓存，继续看 get：
     // 看到：Object subKey = Objects.requireNonNull(subKeyFactory.apply(key, parameter));
+
+    // 注意到subKeyFactory，我们找到cache的赋值的地方：
+    //    /**
+    //     * a cache of proxy classes
+    //     */
+    //    private static final WeakCache<ClassLoader, Class<?>[], Class<?>>
+    //        proxyClassCache = new WeakCache<>(new KeyFactory(), new ProxyClassFactory());
+    // 发现这是一个 ProxyClassFactory
     // 看 apply，调用者实现了BiFunction接口，实际上是ProxyClassFactory
 
     // 其中 apply的实现如下：
     // public Class<?> apply(ClassLoader var1, Class<?>[] var2) {
     // 参数一个是ClassLoader，一个是接口，就是一开始的入参
 
+    // (Java后台的包有 ProxyGenerator，但是安卓没有)
     // 继续看到 byte[] var22 = ProxyGenerator.generateProxyClass(var23, var2, var17);
     // var22就是产出的动态代理类的字节码
     // 前面两行：
@@ -76,5 +85,11 @@ public class MyShop implements InvocationHandler {
 
     // 这个类只存在于内存中，不过我们可以取出这段代码，将其写出，然后使用反编译工具编译出来
 
+    // 看到动态代理类的源码后我们发现
     // 一个对象经过动态代理之后，动态代理对象的任何方法被调用，都会调用到 InvocationHandler
+    // 实际上就是加一个中间层
+
+    // “计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决”
+    //
+    // “Any problem in computer science can be solved by anther layer of indirection.”
 }

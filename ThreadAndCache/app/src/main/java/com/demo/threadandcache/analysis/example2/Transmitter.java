@@ -11,7 +11,8 @@ class Transmitter {
     private static final String TAG = Transmitter.class.getSimpleName();
 
     private String packet;
-    // 轮流（锁的是当前对象，对于多个线程turns是个单例）
+    // 轮流（锁的是当前对象，同一时间只有一个线程获取锁，
+    // 同一时间只有一个线程会写，不会产生ABA问题，所以可以用volatile）
     private volatile int turns = 0;
 
     synchronized void send(String packet) {

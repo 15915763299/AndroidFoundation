@@ -29,6 +29,11 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = ActMain.class.getSimpleName();
 
     @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);

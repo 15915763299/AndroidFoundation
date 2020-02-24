@@ -1,6 +1,7 @@
 package com.demo.threadandcache.analysis;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -13,13 +14,13 @@ public class LockReadWriteAnalysis {
     public static void main(String[] args) {
 //        final S1 s1 = new S1(0);
 //        run(s1);
-        //read time: 78
-        //write time: 62
+        //read time: 1725
+        //write time: 1665
 
         final S2 s2 = new S2(0);
         run(s2);
-        //read time: 64
-        //write time: 59
+        //read time: 63
+        //write time: 63
     }
 
     private static void run(Statistics statistics) {
@@ -29,16 +30,15 @@ public class LockReadWriteAnalysis {
                 ReadThread readThread = new ReadThread(statistics);
                 readThread.start();
             }
-            sleep(100);
+            ms(100);
             writeThread.start();
         }
     }
 
-    private static void sleep(long time) {
+    private static void ms(int seconds) {
         try {
-            Thread.sleep(time);
+            TimeUnit.MILLISECONDS.sleep(seconds);
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
@@ -48,6 +48,10 @@ public class LockReadWriteAnalysis {
         void setTotalAmount(int totalAmount);
     }
 
+
+    /**
+     * synchronized 同步锁实现
+     */
     private static class S1 implements Statistics {
         private int totalAmount;
 
@@ -56,15 +60,19 @@ public class LockReadWriteAnalysis {
         }
 
         public synchronized int getTotalAmount() {
+            ms(5);
             return totalAmount;
         }
 
         public synchronized void setTotalAmount(int totalAmount) {
+            ms(5);
             this.totalAmount = totalAmount;
         }
     }
 
-
+    /**
+     * 读写锁实现
+     */
     private static class S2 implements Statistics {
         private ReentrantReadWriteLock lock;
         private int totalAmount;
@@ -105,11 +113,7 @@ public class LockReadWriteAnalysis {
         public void run() {
             long start = System.currentTimeMillis();
             for (int i = 0; i < 10; i++) {
-                try {
-                    Thread.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                ms(5);
                 statistics.getTotalAmount();
             }
             System.out.println("read time: " + (System.currentTimeMillis() - start));
@@ -129,11 +133,7 @@ public class LockReadWriteAnalysis {
             long start = System.currentTimeMillis();
             Random random = new Random();
             for (int i = 0; i < 10; i++) {
-                try {
-                    Thread.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                ms(5);
                 statistics.setTotalAmount(random.nextInt(100));
             }
             System.out.println("write time: " + (System.currentTimeMillis() - start));
