@@ -27,5 +27,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    // 这里引入一个Java版的okhttp，方便源码分析
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    testImplementation 'junit:junit:4.12'
 }
 

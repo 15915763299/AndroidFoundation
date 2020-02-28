@@ -26,7 +26,7 @@ import java.lang.ref.WeakReference;
 /**
  * @author 尉迟涛
  * create time : 2020/2/26 18:39
- * description :
+ * description : 使用binder与后台service通讯，设置回调监听，service独立进程
  */
 public class ActChartRoom extends AppCompatActivity {
 
@@ -56,6 +56,7 @@ public class ActChartRoom extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             msgDispatcher = IMsgDispatcher.Stub.asInterface(service);
             try {
+                // 注册远程listener
                 msgDispatcher.registerListener(listener);
             } catch (RemoteException e) {
                 e.printStackTrace();

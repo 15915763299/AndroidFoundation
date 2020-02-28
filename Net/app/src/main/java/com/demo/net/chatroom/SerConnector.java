@@ -21,7 +21,7 @@ import java.util.Arrays;
 /**
  * @author 尉迟涛
  * create time : 2020/2/26 18:46
- * description :
+ * description : 独立进程与前端Activity通讯，使用handler重复发送心跳包，并回调服务器的返回信息给前端
  */
 public class SerConnector extends Service {
 
@@ -47,7 +47,9 @@ public class SerConnector extends Service {
 
         @Override
         public void registerListener(IOnReceiveListener listener) throws RemoteException {
+            // 此时readThread可能未初始化，保留listener
             SerConnector.this.listener = listener;
+            // 赋值listener
             if (readThread != null) {
                 readThread.setListener(listener);
             }
@@ -69,6 +71,7 @@ public class SerConnector extends Service {
                     new InitSocketThread().start();
                 }
             }
+            // 循环发送
             handler.postDelayed(this, HEART_BEAT_RATE);
         }
     };
@@ -103,17 +106,20 @@ public class SerConnector extends Service {
     }
 
     /**
-     * 初始化Socket
+     * 初始化Socket（耗时任务，交给非主线程处理）
      */
     private void initSocket() {
         try {
             Socket socket = new Socket(HOST, ChatService.PORT);
             wf = new WeakReference<>(socket);
+            // 接收信息线程
             readThread = new ReadThread(socket);
+            // 赋值listener
             if (listener != null) {
                 readThread.setListener(listener);
             }
             readThread.start();
+            // 发送心跳包
             handler.postDelayed(heartBeatRunnable, HEART_BEAT_RATE);
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -124,6 +130,7 @@ public class SerConnector extends Service {
 
     /**
      * 接收信息线程
+     * Socket初始化的时候启动，不断循环地读 outputStream 中的值
      */
     private class ReadThread extends Thread {
         private WeakReference<Socket> wf;
@@ -134,7 +141,7 @@ public class SerConnector extends Service {
             this.wf = new WeakReference<>(socket);
         }
 
-        public void setListener(IOnReceiveListener listener) {
+        void setListener(IOnReceiveListener listener) {
             this.listener = listener;
         }
 
@@ -160,6 +167,7 @@ public class SerConnector extends Service {
                     if (length > 0) {
                         String msg = new String(Arrays.copyOf(buffer, length)).trim();
                         Log.d(TAG, msg);
+                        // 回调信息
                         if (listener != null) {
                             if (msg.equals(ChatService.RECEIVED_HEART_BEAT)) {
                                 listener.onHeartBeat(msg);

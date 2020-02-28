@@ -54,7 +54,9 @@ public class ChatService {
             try {
                 if (clients.size() > 0) {
                     for (Socket client : clients) {
-                        client.close();
+                        if (client != null) {
+                            client.close();
+                        }
                     }
                 }
                 clients.clear();
@@ -94,15 +96,7 @@ public class ChatService {
                 pw.flush();
             } catch (IOException e) {
                 e.printStackTrace();
-            } /*finally {
-                if (os != null) {
-                    try {
-                        os.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }*/
+            }
         }
 
         @Override
