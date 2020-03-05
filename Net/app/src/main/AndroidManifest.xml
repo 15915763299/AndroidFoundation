@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".chatroom.ActChartRoom" />
+        <activity android:name=".rxjava.ActRxJava" />
 
         <service
             android:name=".chatroom.SerConnector"

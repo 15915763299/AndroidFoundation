@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.net.chatroom.ActChartRoom;
+import com.demo.net.rxjava.ActRxJava;
 
 /**
  * 针对不同的网络通信层次，Java给我们提供的网络功能有四大类：
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.btn1).setOnClickListener(this);
+        findViewById(R.id.btn2).setOnClickListener(this);
     }
 
     @Override
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn1:
                 startActivity(new Intent(this, ActChartRoom.class));
+                break;
+            case R.id.btn2:
+                startActivity(new Intent(this, ActRxJava.class));
                 break;
             default:
         }

@@ -18,7 +18,8 @@ import okhttp3.Route;
 /**
  * @author 尉迟涛
  * create time : 2020/2/27 17:25
- * description :
+ * description : 注意一个应用只实例化一个client喔
+ * test 目录下有代理相关的用法
  */
 public class OkhttpSample {
 
