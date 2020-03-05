@@ -120,8 +120,9 @@ public class ActUseSocket extends AppCompatActivity implements View.OnClickListe
             while (client == null) {
                 try {
                     client = new Socket("localhost", 8688);
-                    printWriter = new PrintWriter(new BufferedWriter(
-                            new OutputStreamWriter(client.getOutputStream())), true);
+                    printWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                            client.getOutputStream()
+                    )), true);
                     handler.sendEmptyMessage(SOCKET_CONNECTED);
                     System.out.println("connect server success");
                 } catch (IOException e) {

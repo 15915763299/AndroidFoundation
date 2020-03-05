@@ -56,9 +56,12 @@ public class SerUseSocketRemote extends Service {
         private void loop() {
             while (!isServiceDestroyed) {
                 try {
-                    // 接受客户端请求
+                    // 接受客户端请求（这个方法会阻塞，直到获取信息）
                     final Socket client = serverSocket.accept();
                     System.out.println("accept");
+//                    responseClient(client);
+
+                    // 再交给另外一个线程去处理信息
                     new Thread() {
                         @Override
                         public void run() {
@@ -92,7 +95,7 @@ public class SerUseSocketRemote extends Service {
                 out.println("接收到信息：" + str);
             }
             System.out.println("client quit.");
-            // 关闭流
+            // 关闭流（可以只关闭最外层的，但是好的习惯是从内到外一层层关闭）
             close(out);
             close(in);
             client.close();
