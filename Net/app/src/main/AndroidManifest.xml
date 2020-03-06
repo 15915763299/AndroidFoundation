@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".chatroom.ActChartRoom" />
         <activity android:name=".rxjava.ActRxJava" />
+        <activity android:name=".rxjava.rxbus.ActRxBus" />
 
         <service
             android:name=".chatroom.SerConnector"

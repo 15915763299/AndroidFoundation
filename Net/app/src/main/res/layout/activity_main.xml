@@ -9,13 +9,19 @@
         android:id="@+id/btn1"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="聊天室" />
+        android:text="简易聊天室" />
 
     <Button
         android:id="@+id/btn2"
         android:layout_width="300dp"
         android:layout_marginTop="20dp"
         android:layout_height="50dp"
-        android:text="RxJava" />
+        android:text="RxJava功能测试" />
 
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:text="自定义RxJBus" />
 </LinearLayout>

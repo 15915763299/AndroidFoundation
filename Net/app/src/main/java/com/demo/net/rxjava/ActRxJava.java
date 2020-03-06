@@ -14,16 +14,12 @@ import org.reactivestreams.Subscription;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -42,7 +38,8 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.act_rx_java);
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
-        findViewById(R.id.btn3).setOnClickListener(this);
+        findViewById(R.id.btn3_1).setOnClickListener(this);
+        findViewById(R.id.btn3_2).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
         findViewById(R.id.btn5).setOnClickListener(this);
         findViewById(R.id.btn6).setOnClickListener(this);
@@ -60,8 +57,11 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
             case R.id.btn2:
                 map();
                 break;
-            case R.id.btn3:
-                backPressure1();
+            case R.id.btn3_1:
+                backPressure1_1();
+                break;
+            case R.id.btn3_2:
+                backPressure1_2();
                 break;
             case R.id.btn4:
                 backPressure2();
@@ -95,6 +95,7 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onNext(String str) {
                 Log.i(TAG, "onNext: " + Thread.currentThread().getName());
+//                sleep(5_000);
                 Log.i(TAG, "onNext: " + str);
             }
 
@@ -111,23 +112,37 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
             }
         };
 
-        observable = observable.map(new Function<String, String>() {
-            @Override
-            public String apply(String s) throws Exception {
-                Log.i(TAG, "apply: " + Thread.currentThread().getName());
-                return s + "map";
-            }
-        });
+
+//        map(new Function<String, String>() {
+//            @Override
+//            public String apply(String s) throws Exception {
+//                Log.i(TAG, "subscribeOn上游: " + Thread.currentThread().getName());
+//                return s + "map";
+//            }
+//        })
 
         observable
+                .map(s -> {
+                    Log.i(TAG, "subscribeOn上游apply: " + Thread.currentThread().getName());
+                    return s + "map";
+                })
                 // 都生效了，但是结果按第一次的执行
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.newThread())
                 .subscribeOn(Schedulers.single())
-                //  都生效了，但是结果按最后一次的执行
+                .map(s -> {
+                    Log.i(TAG, "subscribeOn下游apply: " + Thread.currentThread().getName());
+                    return "1" + s;
+                })
+                // 都生效了，但是结果按最后一次的执行(observeOn：onNext等，发生在指定线程，下游发生在指定线程)
                 .observeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.newThread())
-                .observeOn(Schedulers.single())
+                .observeOn(Schedulers.io())
+                .map(s -> {
+                    Log.i(TAG, "observeOn下游apply: " + Thread.currentThread().getName());
+                    return "1" + s;
+                })
                 // 订阅
                 .subscribe(observer);
     }
@@ -156,28 +171,50 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
      * 背压：
      * 发送太快太多，处理太慢，出现背压
      * 先决条件：异步，上游产生数据的速度比下游处理数据的速度快
+     * rxjava2测试
      */
-    private void backPressure1() {
+    private void backPressure1_1() {
         // RXJava2.0中Observable不再支持背压,既然说Observable不再支持背压，
         // 那么我们随便搞应该就不会报哪个MissingBackPressureException
         disposable = Observable.<Integer>create(
                 emitter -> {
                     for (int i = 0; ; i++) {   //无限循环发事件
                         emitter.onNext(i);
-                        sleep(10);
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((Integer integer) -> {
                     Log.i(TAG, "call: " + integer);
-                    sleep(1000);//背压出现
-//                    sleep(10);
+                    sleep(10);//背压出现
                 });
     }
 
+    /**
+     * rxjava1测试
+     */
+    private void backPressure1_2() {
+//        Observable.create(new Observable.OnSubscribe<Integer>() {
+//            @Override
+//            public void call(Subscriber<? super Integer> subscriber) {
+//                for (int i = 0; ; i++) {   //无限循环发事件
+//                    subscriber.onNext(i);
+//                }
+//            }
+//        }).subscribeOn(Schedulers.io())
+////           .observeOn(Schedulers.newThread())
+//                .subscribe(new Action1<Integer>() {
+//                    @Override
+//                    public void call(Integer integer) {
+//                        System.out.println("call: " + integer);
+//                    }
+//                });
+    }
+
+    /**
+     * 解决方案1 同一线程 处理+回调，但是这是UI线程啊。。。，而且内存抖动会比较厉害
+     */
     public void backPressure2() {
-        //解决方案1 同一线程 处理+回调，但是这是UI线程啊。。。，而且内存抖动会比较厉害
         disposable = Observable.<Integer>create(
                 emitter -> {
                     for (int i = 0; ; i++) {
@@ -192,8 +229,10 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
                 });
     }
 
+    /**
+     * 解决方案2 部分取样
+     */
     public void backPressure3() {
-        //解决方案2 部分取样
         disposable = Observable.<Integer>create(
                 emitter -> {
                     for (int i = 0; ; i++) {
@@ -216,46 +255,45 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
      * 背压策略：BackpressureStrategy
      * BUFFER缓存、ERROR抛异常、DROP丢弃、LATEST丢弃旧的
      * 有点像线程池的拒绝策略
+     * https://www.jianshu.com/p/220955eefc1f
      */
     public void backPressure4() {
-        Flowable.create(new FlowableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
-                Log.d(TAG, "emit 1");
-                emitter.onNext(1);
-                Log.d(TAG, "emit 2");
-                emitter.onNext(2);
-                Log.d(TAG, "emit 3");
-                emitter.onNext(3);
-                Log.d(TAG, "emit complete");
-                emitter.onComplete();
-            }
-        }, BackpressureStrategy.ERROR)
+//        Flowable.create(new FlowableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+//                emitter.onNext(1);
+//                emitter.onNext(2);
+//                emitter.onNext(3);
+//                emitter.onComplete();
+//            }
+//        }, BackpressureStrategy.ERROR)
+        Flowable.range(0, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Integer>() {
                     @Override
                     public void onSubscribe(Subscription s) {
+                        // 使用subscription控制流速
                         subscription = s;
+                        subscription.request(1);
                     }
 
                     @Override
                     public void onNext(Integer integer) {
                         Log.d(TAG, "onNext: " + integer);
-                        subscription.request(2);
+                        subscription.request(1);
                     }
 
                     @Override
                     public void onError(Throwable t) {
-                        Log.d(TAG, "onComplete");
+                        t.printStackTrace();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        Log.d(TAG, "onComplete");
                     }
                 });
-
     }
 
     private void sleep(long time) {

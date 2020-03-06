@@ -18,12 +18,26 @@
         android:layout_marginTop="20dp"
         android:text="map" />
 
-    <Button
-        android:id="@+id/btn3"
+    <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="BackPressure1" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn3_1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="bp RxJava2" />
+
+        <Button
+            android:id="@+id/btn3_2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="bp RxJava1" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn4"

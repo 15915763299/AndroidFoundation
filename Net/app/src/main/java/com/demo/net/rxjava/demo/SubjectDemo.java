@@ -1,4 +1,4 @@
-package com.demo.net.rxjava;
+package com.demo.net.rxjava.demo;
 
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.AsyncSubject;

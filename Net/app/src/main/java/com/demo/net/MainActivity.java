@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.net.chatroom.ActChartRoom;
 import com.demo.net.rxjava.ActRxJava;
+import com.demo.net.rxjava.rxbus.ActRxBus;
 
 /**
  * 针对不同的网络通信层次，Java给我们提供的网络功能有四大类：
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
+        findViewById(R.id.btn3).setOnClickListener(this);
     }
 
     @Override
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn2:
                 startActivity(new Intent(this, ActRxJava.class));
+                break;
+            case R.id.btn3:
+                startActivity(new Intent(this, ActRxBus.class));
                 break;
             default:
         }

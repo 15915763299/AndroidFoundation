@@ -5,7 +5,9 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.functions.Consumer;
+import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * 冷：观察者订阅了，才会开始执行发射数据流的代码
@@ -29,21 +31,47 @@ public class HotColdObservableDemo {
 
     public static void main(String... args) {
 
+//        new Consumer<Long>() {
+//            @Override
+//            public void accept(Long aLong) throws Exception {
+//                emitter.onNext(aLong);
+//            }
+//        }
+//        ↑变为↓
+//        emitter::onNext
+
         //创建一个"冷"的被观察者
-        Observable<Long> observable = Observable.create((ObservableEmitter<Long> emitter) -> {
-            /*Disposable disposable = */
-            Observable.interval(10, TimeUnit.MILLISECONDS, Schedulers.computation())
-                    .take(Integer.MAX_VALUE)
-                    .subscribe(new Consumer<Long>() {
-                        @Override
-                        public void accept(Long aLong) throws Exception {
-                            emitter.onNext(aLong);
-                        }
-                    });
-        }).observeOn(Schedulers.newThread());//加上变为热.publish();
+        Observable<Long> cold = Observable
+                .create((ObservableEmitter<Long> emitter) ->
+                        Observable.interval(10, TimeUnit.MILLISECONDS, Schedulers.computation())
+                                .take(Integer.MAX_VALUE)
+                                .subscribe(emitter::onNext)
+                ).observeOn(Schedulers.newThread());
 
-        //加上变为热((ConnectableObservable<Long>) observable).connect();
 
+        //创建一个"热"的被观察者
+        ConnectableObservable<Long> hot = Observable
+                .create((ObservableEmitter<Long> emitter) ->
+                        Observable.interval(10, TimeUnit.MILLISECONDS, Schedulers.computation())
+                                .take(Integer.MAX_VALUE)
+                                .subscribe(emitter::onNext)
+                )
+                .observeOn(Schedulers.newThread())
+                .publish();
+        //执行完这一步才真正变成hot
+        hot.connect();
+
+
+        //借助Subject 把Cold Observable 转化成 Hot Observable
+        PublishSubject<Long> subject = PublishSubject.create();
+        cold.subscribe(subject);
+
+//        test(cold);
+//        test(hot);
+        test(subject);//subject为 Hot Observable
+    }
+
+    private static void test(Observable observable) {
         Consumer<Long> consumer1 = newConsumer("consumer1: ");
         Consumer<Long> consumer2 = newConsumer("    consumer2: ");
         Consumer<Long> consumer3 = newConsumer("        consumer3: ");
@@ -56,12 +84,7 @@ public class HotColdObservableDemo {
     }
 
     private static <T> Consumer<T> newConsumer(String info) {
-        return new Consumer<T>() {
-            @Override
-            public void accept(T o) throws Exception {
-                System.out.println(info + o);
-            }
-        };
+        return o -> System.out.println(info + o);
     }
 
     private static void sleep(long time) {
