@@ -20,18 +20,26 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    // 开启双向数据绑定
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    implementation 'com.google.android.material:material:1.1.0'
 
     // 这里引入一个Java版的okhttp，方便源码分析
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    // 使用Stetho调试
+    implementation 'com.facebook.stetho:stetho:1.4.2'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.4.2'
 
     //https://www.jianshu.com/p/e67d8ec9e44d
     //retrofit2

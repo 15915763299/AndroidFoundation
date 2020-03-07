@@ -7,6 +7,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.net.chatroom.ActChartRoom;
+import com.demo.net.requestdemo.login.ActLogin;
+import com.demo.net.requestdemo.project.ActGetProject;
+import com.demo.net.requestdemo.register.ActRegister;
 import com.demo.net.rxjava.ActRxJava;
 import com.demo.net.rxjava.rxbus.ActRxBus;
 
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
+        findViewById(R.id.net1).setOnClickListener(this);
+        findViewById(R.id.net2).setOnClickListener(this);
+        findViewById(R.id.net3).setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn3:
                 startActivity(new Intent(this, ActRxBus.class));
+                break;
+            case R.id.net1:
+                startActivity(new Intent(this, ActRegister.class));
+                break;
+            case R.id.net2:
+                startActivity(new Intent(this, ActLogin.class));
+                break;
+            case R.id.net3:
+                startActivity(new Intent(this, ActGetProject.class));
                 break;
             default:
         }

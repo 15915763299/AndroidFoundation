@@ -44,18 +44,22 @@ public class Fragment2 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        compositeDisposable.add(
-                rxBus.toFlowable(FragmentEvent.class)
-                        .subscribe(crossActivityEvent -> {
-                            tx.setText(crossActivityEvent.imfo);
-                            Log.i("Fragment2", crossActivityEvent.imfo);
-                        })
-        );
+        if (!compositeDisposable.isDisposed()) {
+            compositeDisposable.add(
+                    rxBus.toFlowable(FragmentEvent.class)
+                            .subscribe(crossActivityEvent -> {
+                                tx.setText(crossActivityEvent.imfo);
+                                Log.i("Fragment2", crossActivityEvent.imfo);
+                            })
+            );
+        }
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        // clear时网络请求会随即cancel
         compositeDisposable.clear();
+        compositeDisposable = null;
+        super.onDestroy();
     }
 }

@@ -311,4 +311,53 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
         }
         super.onDestroy();
     }
+
+
+
+//    private static void flowabledemo() {
+//        /*
+//         * 不设置Subscription的情况
+//         * 查看源码可知RxJava2.0以上，Flowable的背压大小为128
+//         * 测试结果：
+//         * 1、使用Flowable不设置subscription.request();的情况下，下游无法收到数据。
+//         * 2、使用Flowable不设置subscription.request();的情况下，上游发送数据超过128，
+//         * 报出MissingBackpressureException。
+//         */
+//
+//        Flowable
+//                .create(new FlowableOnSubscribe<Integer>() {
+//                    @Override
+//                    public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+//                        for (int i = 0; i < 129; i++) {
+//                            System.out.println("emitter=" + i);
+//                            emitter.onNext(i);
+//                        }
+//                    }
+//                }, BackpressureStrategy.MISSING)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        s.request(Long.MAX_VALUE);
+//                        System.out.println("onSubscribe");
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer integer) {
+//                        System.out.println("onNext=" + integer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        System.out.println("onError=" + t);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        System.out.println("onComplete");
+//                    }
+//                });
+//
+//    }
 }

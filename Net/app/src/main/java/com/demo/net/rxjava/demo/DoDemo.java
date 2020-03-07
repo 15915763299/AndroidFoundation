@@ -23,8 +23,10 @@ public class DoDemo {
                         + (notify.isOnNext()
                         ? "onNext" : notify.isOnComplete()
                         ? "onComplete" : "onEror")))
-                .doOnLifecycle(disposable -> System.out.println("doOnLifecycle: " + disposable.isDisposed())
-                        , () -> System.out.println("doOnLifecycle run"))
+                .doOnLifecycle(
+                        disposable -> System.out.println("doOnLifecycle: " + disposable.isDisposed()),
+                        () -> System.out.println("doOnLifecycle run")
+                )
                 .subscribe(s -> System.out.println("收到消息: " + s));
 
         //1、doOnSubscribe: io.reactivex.internal.operators.observable.ObservableDoOnEach$DoOnEachObserver@64cee07

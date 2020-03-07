@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.demo.net.requestdemo.register.RegisterInfo" />
+
+        <variable
+            name="info"
+            type="RegisterInfo" />
+
+        <variable
+            name="codeTip"
+            type="java.lang.String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#eeeeee">
+
+            <TextView
+                android:id="@+id/txResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/edt1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/please_entry_account"
+            android:inputType="number"
+            android:maxLength="11"
+            android:text="@={info.account}" />
+
+        <EditText
+            android:id="@+id/edt2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/please_entry_pwd"
+            android:inputType="text"
+            android:maxLength="20"
+            android:text="@={info.pwd}" />
+
+        <EditText
+            android:id="@+id/edt3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/please_confirm_pwd"
+            android:inputType="text"
+            android:maxLength="20"
+            android:text="@={info.confirmPwd}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="3"
+                android:hint="@string/please_entry_val_code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:text="@={info.verifyCode}" />
+
+            <Button
+                android:id="@+id/btn1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:text="@{codeTip, default=@string/get_val_code}" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/register" />
+
+    </LinearLayout>
+</layout>

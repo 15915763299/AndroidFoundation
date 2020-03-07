@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,6 +24,10 @@
         <activity android:name=".chatroom.ActChartRoom" />
         <activity android:name=".rxjava.ActRxJava" />
         <activity android:name=".rxjava.rxbus.ActRxBus" />
+
+        <activity android:name=".requestdemo.register.ActRegister" />
+        <activity android:name=".requestdemo.login.ActLogin" />
+        <activity android:name=".requestdemo.project.ActGetProject" />
 
         <service
             android:name=".chatroom.SerConnector"
