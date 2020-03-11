@@ -45,4 +45,11 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:text="Picture Fall Glide" />
+
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="Thread Priority" />
 </LinearLayout>

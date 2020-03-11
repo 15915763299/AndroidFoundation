@@ -23,12 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".thread.ActAsyncTask" />
-        <activity android:name=".thread.ActIntentService" />
         <activity android:name=".cache.ActLruCache" />
         <activity android:name=".cache.ActDiskLruCache" />
         <activity android:name=".cache.loader.ActPictureFalls" />
         <activity android:name=".cache.glide.ActPictureFallsGlide" />
+
+        <activity android:name=".thread.ActAsyncTask" />
+        <activity android:name=".thread.ActIntentService" />
+        <activity android:name=".thread.ActThreadPriority" />
 
         <service android:name=".thread.SerIntentService" />
     </application>
