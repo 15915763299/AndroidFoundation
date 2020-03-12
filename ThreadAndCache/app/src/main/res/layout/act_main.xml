@@ -52,4 +52,11 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:text="Thread Priority" />
+
+    <Button
+        android:id="@+id/btn8"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="Memory Leak Test" />
 </LinearLayout>

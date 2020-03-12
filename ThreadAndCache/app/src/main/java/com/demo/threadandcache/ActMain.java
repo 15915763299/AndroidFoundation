@@ -15,6 +15,7 @@ import com.demo.threadandcache.cache.ActLruCache;
 import com.demo.threadandcache.cache.glide.ActPictureFallsGlide;
 import com.demo.threadandcache.cache.loader.ActPictureFalls;
 import com.demo.threadandcache.thread.ActAsyncTask;
+import com.demo.threadandcache.thread.ActEmpty;
 import com.demo.threadandcache.thread.ActIntentService;
 import com.demo.threadandcache.thread.ActThreadPriority;
 
@@ -45,6 +46,7 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.btn5).setOnClickListener(this);
         findViewById(R.id.btn6).setOnClickListener(this);
         findViewById(R.id.btn7).setOnClickListener(this);
+        findViewById(R.id.btn8).setOnClickListener(this);
 
         getDirTest();
     }
@@ -74,6 +76,9 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btn7:
                 clzz = ActThreadPriority.class;
+                break;
+            case R.id.btn8:
+                clzz = ActEmpty.class;
                 break;
             default:
                 clzz = null;
