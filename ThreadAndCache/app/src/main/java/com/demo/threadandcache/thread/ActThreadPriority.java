@@ -13,7 +13,7 @@ import com.demo.threadandcache.R;
 /**
  * @author 尉迟涛
  * create time : 2020/3/11 9:34
- * description :
+ * description : Process.setThreadPriority 效果比 thread.setPriority 效果明显
  */
 public class ActThreadPriority extends AppCompatActivity {
 

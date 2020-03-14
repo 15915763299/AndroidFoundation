@@ -31,6 +31,7 @@
         <activity android:name=".thread.ActAsyncTask" />
         <activity android:name=".thread.ActIntentService" />
         <activity android:name=".thread.ActThreadPriority" />
+        <activity android:name=".thread.ActThreadPriority2" />
         <activity android:name=".thread.ActEmpty" />
 
 

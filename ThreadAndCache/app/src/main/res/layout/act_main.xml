@@ -46,12 +46,30 @@
         android:layout_marginTop="10dp"
         android:text="Picture Fall Glide" />
 
-    <Button
-        android:id="@+id/btn7"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:text="Thread Priority" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn7_1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="Thread Priority1" />
+
+        <Button
+            android:id="@+id/btn7_2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="Thread Priority2" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn8"
