@@ -88,6 +88,9 @@ public class ActThreadPriority2 extends AppCompatActivity {
     /**
      * THREAD_PRIORITY_LOWEST = 19;
      * THREAD_PRIORITY_BACKGROUND = 10;
+     *
+     * THREAD_PRIORITY_DEFAULT = 0;
+     *
      * THREAD_PRIORITY_FOREGROUND = -2;
      * THREAD_PRIORITY_DISPLAY = -4;
      * THREAD_PRIORITY_URGENT_DISPLAY = -8;
