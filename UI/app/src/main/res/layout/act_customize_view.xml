@@ -5,18 +5,13 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="这是一个有Bug的View，有待解决" />
-
     <com.demo.ui.module.customize.RippleLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/holo_green_dark"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btn_ripple1"
@@ -28,6 +23,7 @@
             android:id="@+id/btn_ripple2"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="#dddddd" />
 
     </com.demo.ui.module.customize.RippleLinearLayout>

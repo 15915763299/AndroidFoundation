@@ -6,12 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import com.demo.ui.R;
 
@@ -38,7 +39,7 @@ public class RippleLinearLayout extends LinearLayout implements Runnable {
     private int INVALIDATE_DURATION = 15;
 
     private View mTouchTarget;
-    private DispatchUpTouchEventRunnable mDispatchUpTouchEventRunnable = new DispatchUpTouchEventRunnable();
+    private LinkedList<DispatchUpTouchEventRunnable> runnables = new LinkedList<>();
 
     public RippleLinearLayout(Context context) {
         super(context);
@@ -131,17 +132,23 @@ public class RippleLinearLayout extends LinearLayout implements Runnable {
             View touchTarget = getTouchTarget(this, x, y);
             if (touchTarget != null && touchTarget.isClickable() && touchTarget.isEnabled()) {
                 mTouchTarget = touchTarget;
+                runnables.offer(new DispatchUpTouchEventRunnable(touchTarget));
+
                 initParametersForChild(event, touchTarget);
                 postInvalidateDelayed(INVALIDATE_DURATION);
             }
         } else if (action == MotionEvent.ACTION_UP) {
             mIsPressed = false;
             postInvalidateDelayed(INVALIDATE_DURATION);
-            mDispatchUpTouchEventRunnable.event = event;
-            postDelayed(mDispatchUpTouchEventRunnable, 200);
+            DispatchUpTouchEventRunnable runnable = runnables.poll();
+            if (runnable != null) {
+                runnable.event = event;
+                post(runnable);
+            }
             return true;
         } else if (action == MotionEvent.ACTION_CANCEL) {
             mIsPressed = false;
+            runnables.poll();
             postInvalidateDelayed(INVALIDATE_DURATION);
         }
 
@@ -174,7 +181,7 @@ public class RippleLinearLayout extends LinearLayout implements Runnable {
 
     @Override
     public boolean performClick() {
-        postDelayed(this, 400);
+        post(this);
         return true;
     }
 
@@ -184,16 +191,21 @@ public class RippleLinearLayout extends LinearLayout implements Runnable {
     }
 
     private class DispatchUpTouchEventRunnable implements Runnable {
-        MotionEvent event;
+        private View target;
+        private MotionEvent event;
+
+        DispatchUpTouchEventRunnable(View target) {
+            this.target = target;
+        }
 
         @Override
         public void run() {
-            if (mTouchTarget == null || !mTouchTarget.isEnabled()) {
+            if (target == null || !target.isEnabled()) {
                 return;
             }
 
-            if (isTouchPointInView(mTouchTarget, (int) event.getRawX(), (int) event.getRawY())) {
-                mTouchTarget.performClick();
+            if (isTouchPointInView(target, (int) event.getRawX(), (int) event.getRawY())) {
+                target.performClick();
             }
         }
     }

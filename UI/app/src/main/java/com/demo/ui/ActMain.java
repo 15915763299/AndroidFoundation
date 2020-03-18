@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.demo.ui.module.anim.ActAnim;
+import com.demo.ui.module.customize2.ActCustomizeView2;
 import com.demo.ui.module.drawable.ActDrawable;
 import com.demo.ui.module.remoteview.ActRemoteView;
 import com.demo.ui.module.customize.ActCustomizeView;
@@ -28,7 +29,8 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.btn3).setOnClickListener(this);
         findViewById(R.id.btn4).setOnClickListener(this);
         findViewById(R.id.btn5).setOnClickListener(this);
-        findViewById(R.id.btn6).setOnClickListener(this);
+        findViewById(R.id.btn6_1).setOnClickListener(this);
+        findViewById(R.id.btn6_2).setOnClickListener(this);
         findViewById(R.id.btn7).setOnClickListener(this);
         findViewById(R.id.btn8).setOnClickListener(this);
         findViewById(R.id.btn9).setOnClickListener(this);
@@ -53,8 +55,11 @@ public class ActMain extends AppCompatActivity implements View.OnClickListener {
             case R.id.btn5:
                 cls = ActScrollConflict.class;
                 break;
-            case R.id.btn6:
+            case R.id.btn6_1:
                 cls = ActCustomizeView.class;
+                break;
+            case R.id.btn6_2:
+                cls = ActCustomizeView2.class;
                 break;
             case R.id.btn7:
                 cls = ActRemoteView.class;

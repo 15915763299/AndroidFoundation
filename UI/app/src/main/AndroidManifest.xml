@@ -25,6 +25,7 @@
         <activity android:name=".module.scroll.ActOtherSmoothScroll" />
         <activity android:name=".module.conflict.ActScrollConflict" />
         <activity android:name=".module.customize.ActCustomizeView" />
+        <activity android:name=".module.customize2.ActCustomizeView2" />
         <activity android:name=".module.remoteview.ActRemoteView" />
         <activity
             android:name=".module.remoteview.ActRemoteViewJump"

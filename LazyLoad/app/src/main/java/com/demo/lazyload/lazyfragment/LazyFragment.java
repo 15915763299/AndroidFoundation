@@ -18,6 +18,8 @@ import java.util.List;
  * @author 尉迟涛
  * create time : 2020/2/24 0:53
  * description :
+ * 如何解决嵌套Fragment问题？模仿点击事件分发，定义显示、隐藏事件的dispatch方法
+ * 判断子Fragment是否为懒加载Fragment，如果是，就分发显示、隐藏事件
  */
 public abstract class LazyFragment extends Fragment {
 

@@ -370,13 +370,15 @@ public class SmoothScrollView extends View {
                 mScroller.abortAnimation();
             }
 
-            // 开始 fling
+            // 开始 fling （惯性滑动）
             mScroller.fling(
                     initX, 0,          //起始位置
                     velocityX, 0,   //速度
                     0, maxX,           //负、正方向滚动最大距离
                     0, 0         //负、正方向滚动最大距离
             );
+
+//            mScroller.startScroll();
             post(this);
         }
 
