@@ -8,6 +8,7 @@ import java.util.concurrent.FutureTask;
  * @date 2020-02-01 11:09
  * FutureTask 特点：
  * 调用 futureTask.get(); 获取结果时，调用线程会阻塞等到 futureTask 执行完毕才返回结果
+ * （get内是一个死循环）
  **/
 public class FutureTaskAnalysis {
 

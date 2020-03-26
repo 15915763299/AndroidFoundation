@@ -2,6 +2,7 @@ package com.demo.threadandcache.thread;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -26,5 +27,12 @@ public class SerIntentService extends IntentService {
 
             Log.d(Thread.currentThread().getName(), data + " done");
         }
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        System.out.println("onStartCommand: " + Thread.currentThread().getName());
+        System.out.println("onStartCommand: " + (Looper.getMainLooper() == Looper.myLooper()));
+        return super.onStartCommand(intent, flags, startId);
     }
 }

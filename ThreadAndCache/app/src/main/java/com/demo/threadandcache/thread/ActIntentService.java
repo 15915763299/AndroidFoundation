@@ -23,7 +23,7 @@ import com.demo.threadandcache.R;
  */
 public class ActIntentService extends Activity implements View.OnClickListener {
 
-    private class MyHandler extends Handler {
+    private static class MyHandler extends Handler {
         MyHandler(Looper looper) {
             super(looper);
         }
