@@ -48,6 +48,7 @@ public class SkinFactoryTest implements LayoutInflater.Factory2 {
         HashMap<String, String> attrsMap;
 
         public void changeSkin() {
+            //TODO 可以定义更详细的换肤规则，字体、背景、大小。、、、、
             if (!TextUtils.isEmpty(attrsMap.get("background"))) {
                 int bgId = Integer.parseInt(attrsMap.get("background").substring(1));
                 String attrType = view.getResources().getResourceTypeName(bgId);
@@ -144,5 +145,12 @@ public class SkinFactoryTest implements LayoutInflater.Factory2 {
             cacheSkinView.add(skinView);
         }
         a.recycle();
+    }
+
+
+    public void changeSkin(){
+        for (SkinView skinView:cacheSkinView){
+            skinView.changeSkin();
+        }
     }
 }

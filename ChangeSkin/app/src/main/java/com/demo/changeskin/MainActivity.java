@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+
+import com.demo.changeskin.x.SkinEngine;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,4 +22,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+
+//    public void changeSkin(){
+//        File skinFile = new File(Environment.getExternalStorageDirectory(), "skin.apk");
+//        SkinEngine.getInstance().load(skinFile.getAbsolutePath());
+//        mSkinFactory.changeSkin();
+//    }
 }
