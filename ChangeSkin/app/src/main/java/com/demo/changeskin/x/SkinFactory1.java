@@ -6,8 +6,10 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 
 import com.demo.changeskin.R;
 
@@ -23,7 +25,7 @@ import java.util.List;
  * create time : 2020/4/7 0:26
  * description :TODO setBackgroundDrawable,流程图
  */
-public class SkinFactoryTest implements LayoutInflater.Factory2 {
+public class SkinFactory1 implements LayoutInflater.Factory2 {
 
     private AppCompatDelegate mDelegate;
     private List<SkinView> cacheSkinView = new ArrayList<>();
@@ -47,16 +49,26 @@ public class SkinFactoryTest implements LayoutInflater.Factory2 {
         View view;
         HashMap<String, String> attrsMap;
 
-        public void changeSkin() {
+        void changeSkin() {
             //TODO 可以定义更详细的换肤规则，字体、背景、大小。、、、、
             if (!TextUtils.isEmpty(attrsMap.get("background"))) {
-                int bgId = Integer.parseInt(attrsMap.get("background").substring(1));
-                String attrType = view.getResources().getResourceTypeName(bgId);
+
+                int id = Integer.parseInt(attrsMap.get("background").substring(1));
+                String attrType = view.getResources().getResourceTypeName(id);
                 if (TextUtils.equals(attrType, "drawable")) {
-                    view.setBackgroundDrawable(SkinEngine.getInstance().getDrawable(bgId));
+                    view.setBackground(SkinEngine.getInstance().getDrawable(id));
                 } else if (TextUtils.equals(attrType, "color")) {
-                    view.setBackgroundColor(SkinEngine.getInstance().getColor(bgId));
+                    view.setBackgroundColor(SkinEngine.getInstance().getColor(id));
                 }
+
+            } else if (!TextUtils.isEmpty(attrsMap.get("src"))) {
+
+                int id = Integer.parseInt(attrsMap.get("src").substring(1));
+                String attrType = view.getResources().getResourceTypeName(id);
+                if (TextUtils.equals(attrType, "mipmap")) {
+                    ((ImageView) view).setImageDrawable(SkinEngine.getInstance().getMipmap(id));
+                }
+
             }
         }
     }
@@ -65,15 +77,6 @@ public class SkinFactoryTest implements LayoutInflater.Factory2 {
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
         View view = mDelegate.createView(parent, name, context, attrs);
-        if (view == null) {
-            mConstructorArgs[0] = context;
-
-            if (-1 == name.indexOf('.')) {//系统的View
-                view = createView(context, name, prefixs, attrs);
-            } else {//自定义的View
-                view = createView(context, name, null, attrs);
-            }
-        }
         if (view != null) {
             collectSkinView(context, attrs, view);
         }
@@ -148,8 +151,8 @@ public class SkinFactoryTest implements LayoutInflater.Factory2 {
     }
 
 
-    public void changeSkin(){
-        for (SkinView skinView:cacheSkinView){
+    public void changeSkin() {
+        for (SkinView skinView : cacheSkinView) {
             skinView.changeSkin();
         }
     }

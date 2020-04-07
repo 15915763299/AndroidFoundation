@@ -1,4 +1,4 @@
-package com.demo.changeskin;
+package com.demo.changeskin.y;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,7 +10,7 @@ import android.view.View;
  * create time : 2020/4/6 21:10
  * description :
  */
-public class SkinFactory implements LayoutInflater.Factory2 {
+public class SkinFactory2 implements LayoutInflater.Factory2 {
 
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {

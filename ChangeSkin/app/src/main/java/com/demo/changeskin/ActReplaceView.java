@@ -1,7 +1,6 @@
 package com.demo.changeskin;
 
 import android.app.Activity;
-import android.app.AppComponentFactory;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,7 +14,7 @@ import android.widget.Button;
  * create time : 2020/4/6 22:22
  * description :
  */
-public class TestActivity extends Activity {
+public class ActReplaceView extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class TestActivity extends Activity {
             @Override
             public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
                 if (TextUtils.equals(name, "TextView")) {
-                    Button button = new Button(TestActivity.this);
+                    Button button = new Button(ActReplaceView.this);
                     button.setAllCaps(false);
                     button.setText("TextView被我换走了");
                     return button;
@@ -43,6 +42,6 @@ public class TestActivity extends Activity {
             }
         });
 
-        setContentView(R.layout.test_activity);
+        setContentView(R.layout.act_replace);
     }
 }

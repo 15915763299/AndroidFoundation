@@ -1,2 +1,3 @@
 rootProject.name='ChangeSkin'
 include ':app'
+include ':outresource'
