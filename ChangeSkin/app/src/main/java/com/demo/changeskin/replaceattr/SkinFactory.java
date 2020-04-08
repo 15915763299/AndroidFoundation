@@ -1,4 +1,4 @@
-package com.demo.changeskin.x;
+package com.demo.changeskin.replaceattr;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,11 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
 
 import com.demo.changeskin.R;
-
-import org.w3c.dom.Attr;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -25,7 +22,7 @@ import java.util.List;
  * create time : 2020/4/7 0:26
  * description :TODO setBackgroundDrawable,流程图
  */
-public class SkinFactory1 implements LayoutInflater.Factory2 {
+public class SkinFactory implements LayoutInflater.Factory2 {
 
     private AppCompatDelegate mDelegate;
     private List<SkinView> cacheSkinView = new ArrayList<>();

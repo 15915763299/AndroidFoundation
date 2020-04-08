@@ -20,9 +20,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActReplaceView" />
-        <activity android:name=".x.ActSkinFactory1" />
-        <activity android:name=".y.ActSkinFactory2" />
+        <activity android:name=".replaceview.ActReplaceView" />
+        <activity android:name=".replaceattr.ActReplaceAttr" />
+        <activity android:name=".custompaint.ActCustomPaint" />
+        <activity android:name=".part.ActPart" />
     </application>
 
 </manifest>

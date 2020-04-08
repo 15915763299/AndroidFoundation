@@ -1,4 +1,4 @@
-package com.demo.changeskin.x;
+package com.demo.changeskin.replaceattr;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,19 +16,19 @@ import java.io.File;
  * create time : 2020/4/7 9:54
  * description :
  */
-public class ActSkinFactory1 extends AppCompatActivity {
+public class ActReplaceAttr extends AppCompatActivity {
 
     public static String APK_FILE_NAME = "outresource-debug.apk";
-    private SkinFactory1 skinFactory1;
+    private SkinFactory skinFactory1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        skinFactory1 = new SkinFactory1();
+        skinFactory1 = new SkinFactory();
         skinFactory1.setDelegate(getDelegate());
         LayoutInflater.from(this).setFactory2(skinFactory1);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_skin_factory1);
+        setContentView(R.layout.act_replace_attr);
 
         changeSkin();
     }

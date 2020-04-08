@@ -1,30 +1,28 @@
 package com.demo.changeskin;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.demo.changeskin.x.ActSkinFactory1;
-import com.demo.changeskin.y.ActSkinFactory2;
+import com.demo.changeskin.part.ActPart;
+import com.demo.changeskin.replaceattr.ActReplaceAttr;
+import com.demo.changeskin.replaceview.ActReplaceView;
+import com.demo.changeskin.custompaint.ActCustomPaint;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
-import static com.demo.changeskin.x.ActSkinFactory1.APK_FILE_NAME;
+import static com.demo.changeskin.replaceattr.ActReplaceAttr.APK_FILE_NAME;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
+        findViewById(R.id.btn4).setOnClickListener(this);
 
         button = findViewById(R.id.btn_write);
         path = getFilesDir().getAbsolutePath() + File.separator + APK_FILE_NAME;
@@ -59,11 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, ActReplaceView.class));
                 break;
             case R.id.btn2:
-                startActivity(new Intent(MainActivity.this, ActSkinFactory1.class));
+                startActivity(new Intent(MainActivity.this, ActReplaceAttr.class));
                 break;
             case R.id.btn3:
-                startActivity(new Intent(MainActivity.this, ActSkinFactory2.class));
+                startActivity(new Intent(MainActivity.this, ActCustomPaint.class));
                 break;
+            case R.id.btn4:
+                startActivity(new Intent(MainActivity.this, ActPart.class));
             case R.id.btn_write:
                 writeApkToExternalStorage();
                 break;

@@ -10,34 +10,35 @@
         android:id="@+id/btn1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="偷梁换柱" />
+        android:text="将TextView换成Button"
+        android:textAllCaps="false" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:text="替换View的属性" />
 
-        <Button
-            android:id="@+id/btn2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="换肤实现" />
-
-        <Button
-            android:id="@+id/btn_write"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="加载外部资源到内部存储" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_write"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="加载外部资源到内部存储" />
 
     <Button
         android:id="@+id/btn3"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="清明App灰色效果"
+        android:text="自定义ViewGroup实现黑白效果"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="局部实现黑白效果"
         android:textAllCaps="false" />
 </LinearLayout>

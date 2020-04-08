@@ -1,4 +1,4 @@
-package com.demo.changeskin.x;
+package com.demo.changeskin.replaceattr;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
