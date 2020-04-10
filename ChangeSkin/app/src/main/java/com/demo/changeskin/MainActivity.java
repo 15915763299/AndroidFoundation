@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn4:
                 startActivity(new Intent(MainActivity.this, ActPart.class));
+                break;
             case R.id.btn_write:
                 writeApkToExternalStorage();
                 break;
