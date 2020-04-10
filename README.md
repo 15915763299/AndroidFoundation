@@ -26,12 +26,12 @@ Android中常见的多线程的使用方式、缓存的使用，并对一些常�
 真正的懒加载，只加载当前显示的Fragment，Fragment移出则立即进行资源释放，解决嵌套ViewPager的Fragment的懒加载问题，
 使用FragmentStatePagerAdapter，适配两种模式（BEHAVIOR_SET_USER_VISIBLE_HINT与BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT）
 
-### 8、Net
+### 7、Net
 网络编程相关，简单的聊天室实现，UDP简单实现，RxJava+OkHttp+Retrofit+DataBinding实现登录注册，自定义RxBus，十几种RxJava操作符分析，背压、冷热被观察者分析
 
-### 9、ChangeSkin
+### 8、ChangeSkin
 三种换肤方案分析，可以结合使用，`AppCompactActivity.vsdx`文件梳理了替换View的逻辑。
 
-### 7、源码逻辑梳理
+### 9、源码逻辑梳理
 framework层部分代码、okhttp、glide等开源框架逻辑梳理。framework 基于Android 10.0.0_r6，下面是 Activity 逻辑分析截图
 > ![UI](/0-Picture/Activity.png "Activity逻辑梳理截图")
