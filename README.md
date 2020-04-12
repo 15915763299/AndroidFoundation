@@ -1,12 +1,10 @@
 # AndroidFoundation
 Android基础知识回顾，以及必要知识记录，运行手机为三星Galaxy Note8，Android版本为9。
 ### 1、IPC
-IPC（Inter-Process Communication）进程间通信简单代码示例，部分截图：
-> <img src="/0-Picture/IPC.jpg" alt="部分截图" width="500" height="313" align="center" />
+IPC（Inter-Process Communication）进程间通信简单代码示例，可直接运行App查看。
 
 ### 2、UI
-自定义View、点击事件、滑动冲突、动画等UI相关的简单示例与参数分析，部分截图：
-> <img src="/0-Picture/UI.jpg" alt="部分截图" width="500" height="313" align="center" />
+自定义View、点击事件、滑动冲突、动画等UI相关的简单示例与参数分析，可直接运行App查看。
 
 ### 3、ThreadAndCache
 Android中常见的多线程的使用方式、缓存的使用，并对一些常见线程类做了分析，比如：
