@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.demo.lazyload.R;
+import com.demo.lazyload.jumpfragment.ColorFragment;
 
 import java.lang.ref.WeakReference;
 
@@ -35,6 +36,7 @@ public class WorkFragment extends LazyFragment {
     public static final String WORKER_4_2 = "4-2";
     public static final String WORKER_4_3 = "4-3";
 
+
     private static final String BUNDLE_INDEX = "index";
     private String index;
     private TextView tx;
@@ -43,7 +45,7 @@ public class WorkFragment extends LazyFragment {
     private DataHandler handler;
     private WeakReference<ActLazy> actLazy;
 
-    public static WorkFragment newInstance(String index,  int behavior) {
+    public static WorkFragment newInstance(String index, int behavior) {
         Bundle bundle = new Bundle();
         bundle.putString(BUNDLE_INDEX, index);
         WorkFragment workFragment = new WorkFragment();
@@ -135,7 +137,7 @@ public class WorkFragment extends LazyFragment {
         countDownTimer.start();
     }
 
-    private void releaseGet(){
+    private void releaseGet() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -220,31 +222,31 @@ public class WorkFragment extends LazyFragment {
                 int color;
                 switch ((String) msg.obj) {
                     case WORKER_1:
-                        color = 0xff26C6DA;
+                        color = ColorFragment.COLORS[0];
                         break;
                     case WORKER_2:
-                        color = 0xff66BB6A;
+                        color = ColorFragment.COLORS[1];
                         break;
                     case WORKER_3:
-                        color = 0xffD4E157;
+                        color = ColorFragment.COLORS[2];
                         break;
                     case WORKER_4:
-                        color = 0xffFFCA28;
+                        color = ColorFragment.COLORS[3];
                         break;
                     case WORKER_5:
-                        color = 0xffFF7043;
+                        color = ColorFragment.COLORS[4];
                         break;
                     case WORKER_4_1:
-                        color = 0xffFFB300;
+                        color = ColorFragment.COLORS[5];
                         break;
                     case WORKER_4_2:
-                        color = 0xffFFA000;
+                        color = ColorFragment.COLORS[6];
                         break;
                     case WORKER_4_3:
-                        color = 0xffFF8F00;
+                        color = ColorFragment.COLORS[7];
                         break;
                     default:
-                        color = 0xff8D6E63;
+                        color = ColorFragment.DEFAULT_COLOR;
                 }
                 wf.get().bg.setBackgroundColor(color);
             }

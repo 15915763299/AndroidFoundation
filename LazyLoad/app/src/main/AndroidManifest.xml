@@ -20,6 +20,7 @@
 
         <activity android:name=".normal.ActNormal" />
         <activity android:name=".lazyfragment.ActLazy" />
+        <activity android:name=".jumpfragment.ActJumpViewPager" />
     </application>
 
 </manifest>

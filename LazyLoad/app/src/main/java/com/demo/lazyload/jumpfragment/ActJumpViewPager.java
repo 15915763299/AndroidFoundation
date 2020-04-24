@@ -1,10 +1,7 @@
-package com.demo.lazyload.lazyfragment;
+package com.demo.lazyload.jumpfragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,34 +20,29 @@ import java.util.List;
 
 /**
  * @author 尉迟涛
- * create time : 2020/2/24 0:37
+ * create time : 2020/4/24 21:51
  * description :
  */
-public class ActLazy extends AppCompatActivity implements
+public class ActJumpViewPager extends AppCompatActivity implements
         ViewPager.OnPageChangeListener,
-        BottomNavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener {
+        BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView navigationView;
     private ViewPager viewPager;
-    private StringBuilder sb;
-    private TextView tx;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_normal);
+        setContentView(R.layout.act_jump_viewpager);
 
         navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
         navigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(WorkFragment.newInstance(WorkFragment.WORKER_1, MainActivity.behavior));
-        fragments.add(WorkFragment.newInstance(WorkFragment.WORKER_2, MainActivity.behavior));
-        fragments.add(WorkFragment.newInstance(WorkFragment.WORKER_3, MainActivity.behavior));
-        fragments.add(NestViewPagerFragment.newInstance(WorkFragment.WORKER_4, MainActivity.behavior));
-        fragments.add(WorkFragment.newInstance(WorkFragment.WORKER_5, MainActivity.behavior));
+        for (int i = 0; i < 5; i++) {
+            fragments.add(ColorFragment.newFragment("--" + i + "--", ColorFragment.COLORS[i]));
+        }
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(
                 getSupportFragmentManager(),
@@ -62,34 +54,8 @@ public class ActLazy extends AppCompatActivity implements
         viewPager.addOnPageChangeListener(this);
         viewPager.setOffscreenPageLimit(1);
         viewPager.setPageMargin(50);
-
-        // 分发点击事件
-        findViewById(R.id.parent).setOnTouchListener(
-                (View v, MotionEvent event) -> viewPager.dispatchTouchEvent(event)
-        );
-
-        tx = findViewById(R.id.tx);
-        findViewById(R.id.btn1).setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn1:
-                sb = new StringBuilder();
-                tx.setText("");
-                break;
-            default:
-        }
-    }
-
-    public void logInFrag(String info) {
-        if (sb == null) {
-            sb = new StringBuilder();
-        }
-        sb.append(info).append("\n");
-        tx.setText(sb.toString());
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -129,19 +95,19 @@ public class ActLazy extends AppCompatActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.fragment_1:
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0, false);
                 return true;
             case R.id.fragment_2:
-                viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(1, false);
                 return true;
             case R.id.fragment_3:
-                viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(2, false);
                 return true;
             case R.id.fragment_4:
-                viewPager.setCurrentItem(3);
+                viewPager.setCurrentItem(3, false);
                 return true;
             case R.id.fragment_5:
-                viewPager.setCurrentItem(4);
+                viewPager.setCurrentItem(4, false);
                 return true;
             default:
         }

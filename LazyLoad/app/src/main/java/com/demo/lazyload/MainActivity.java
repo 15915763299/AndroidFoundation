@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.demo.lazyload.fitchild.FitFragment;
+import com.demo.lazyload.jumpfragment.ActJumpViewPager;
 import com.demo.lazyload.lazyfragment.ActLazy;
 import com.demo.lazyload.normal.ActNormal;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
+        findViewById(R.id.btn4).setOnClickListener(this);
 
         tx_behavior = findViewById(R.id.tx_behavior);
         tx_behavior.setText("BEHAVIOR_SET_USER_VISIBLE_HINT");
@@ -65,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     behavior = FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT;
                     tx_behavior.setText("BEHAVIOR_SET_USER_VISIBLE_HINT");
                 }
+                break;
+            case R.id.btn4:
+                startActivity(new Intent(this, ActJumpViewPager.class));
+                break;
             default:
         }
     }
