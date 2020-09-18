@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.ipc.use.aidl.ActBookManager;
 import com.demo.ipc.use.binderpool.client.ActBinderPool;

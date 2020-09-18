@@ -2,8 +2,9 @@ package com.demo.ipc.use.bundle;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import static com.demo.ipc.use.bundle.ActUseBundle.ACTION;
 
