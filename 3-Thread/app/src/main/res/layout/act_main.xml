@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:gravity="center_horizontal"
+        android:text="以下demo基本都需要查看log\n\n更多线程相关类、字段的分析，在test目录下可以查看\n\n（包括各种锁、线程各种操作方法、ThreadLocal生产者消费者模型等等）" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="AsyncTask" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="IntentService" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn7_1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="Thread Priority1" />
+
+        <Button
+            android:id="@+id/btn7_2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="Thread Priority2" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn8"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:text="Memory Leak Test" />
+</LinearLayout>
