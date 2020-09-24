@@ -13,7 +13,7 @@ import dalvik.system.DexClassLoader;
 /**
  * @author 尉迟涛
  * create time : 2020/2/13 9:39
- * description :
+ * description : 加载插件Resource
  */
 public class LoadUtil {
 
@@ -22,8 +22,10 @@ public class LoadUtil {
      */
     private final static String PLUGIN_PATH = "/sdcard/plugin-debug.apk";
 
+    /**
+     * 将插件dex加入宿主dex目录中
+     */
     public static void loadClass(Context context) {
-
         try {
             // BaseDexClassLoader 的 findClass 方法在 pathList 中寻找类
             // BaseDexClassLoader 类中保存了 DexPathList pathList 对象
@@ -68,7 +70,6 @@ public class LoadUtil {
             System.arraycopy(pluginDexElements, 0, dexElements, hostDexElements.length, pluginDexElements.length);
             //替换宿主的 dexElements
             dexElementsField.set(hostPathList, dexElements);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

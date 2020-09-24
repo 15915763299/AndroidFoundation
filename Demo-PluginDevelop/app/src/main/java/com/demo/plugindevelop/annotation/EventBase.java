@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author 尉迟涛
  * create time : 2020/2/21 12:06
- * description :
+ * description : 点击事件基础注解
  */
 // Annotation type declaration
 @Target(ElementType.ANNOTATION_TYPE)

@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author 尉迟涛
  * create time : 2020/2/21 9:27
- * description :
+ * description : 获取ContentView的id
  */
 // 定义在什么位置使用
 // TYPE: 用于描述类、接口(包括注解类型) 或enum声明 Class, interface

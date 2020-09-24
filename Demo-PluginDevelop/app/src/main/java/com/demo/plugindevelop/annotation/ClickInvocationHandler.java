@@ -8,12 +8,18 @@ import java.lang.reflect.Method;
 /**
  * @author 尉迟涛
  * create time : 2020/2/21 13:24
- * description :
+ * description : 一层动态代理，调用对应对象的对应方法
  */
 public class ClickInvocationHandler implements InvocationHandler {
 
-    private Context context;
+    /**
+     * 被注解的方法
+     */
     private Method clickMethod;
+    /**
+     * 包含被注解方法的对象
+     */
+    private Context context;
 
     public ClickInvocationHandler(Context context, Method clickMethod) {
         this.context = context;

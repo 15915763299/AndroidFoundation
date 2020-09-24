@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn1:
-                requestPermission();
+                if (requestPermission()) {
+                    loadStaticPlugin();
+                    loadPluginActivity();
+                }
                 break;
             case R.id.btn2:
                 Intent intent = new Intent(this, ActAnnotation.class);
@@ -52,26 +55,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void requestPermission() {
+    /**
+     * 权限是否已通过
+     */
+    private boolean requestPermission() {
         Log.e(TAG, "checkPermission");
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "requestPermission");
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+            return false;
         } else {
-            loadStaticPlugin();
-            loadPluginActivity();
+            return true;
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 loadStaticPlugin();
                 loadPluginActivity();
             } else {
@@ -86,8 +87,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void loadStaticPlugin() {
         Log.e(TAG, "loadStaticPlugin");
+        // 加载插件dex
         LoadUtil.loadClass(this);
 
+        // 运行插件代码
         try {
             Class<?> staticPluginClass = Class.forName("com.demo.plugin.StaticPlugin");
             Method printMethod = staticPluginClass.getMethod("print");

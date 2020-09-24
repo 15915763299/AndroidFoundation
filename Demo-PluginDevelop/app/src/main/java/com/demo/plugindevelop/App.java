@@ -10,6 +10,9 @@ import android.content.res.Resources;
  */
 public class App extends Application {
 
+    /**
+     * 自定义Resource
+     */
     private Resources resources;
 
     @Override

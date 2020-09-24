@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author 尉迟涛
  * create time : 2020/2/21 11:50
- * description :
+ * description : 注解View，获取View id
  */
 // 用于描述域 Field declaration (includes enum constants)
 @Target(ElementType.FIELD)

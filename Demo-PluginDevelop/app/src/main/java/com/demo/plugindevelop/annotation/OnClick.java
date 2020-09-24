@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * @author 尉迟涛
  * create time : 2020/2/21 12:17
- * description :
+ * description : 点击事件
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

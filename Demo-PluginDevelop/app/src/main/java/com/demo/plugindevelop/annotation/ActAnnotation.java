@@ -13,7 +13,7 @@ import com.demo.plugindevelop.R;
 /**
  * @author 尉迟涛
  * create time : 2020/2/21 9:16
- * description :
+ * description : 使用注解实现 setContentView、setOnClickListener、setOnLongClickListener
  */
 @ContentView(value = R.layout.dact_annotation)
 public class ActAnnotation extends Activity {
@@ -30,6 +30,10 @@ public class ActAnnotation extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 注解注入关键信息，最终还是要通过当前对象去找到注解，获取关键信息，然后执行统一的代码
+        // 类似于接口，只是表现形式不同
+
         // 可以放到BaseActivity里
         InjectUtils.inject(this);
     }
