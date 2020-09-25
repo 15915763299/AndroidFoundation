@@ -10,7 +10,7 @@
         android:id="@+id/btn1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="将TextView换成Button"
+        android:text="使用Factory2将TextView换成Button"
         android:textAllCaps="false" />
 
     <Button
@@ -18,7 +18,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="替换View的属性" />
+        android:text="使用Factory2替换View的属性\n（使用擦肩资源）" />
 
     <Button
         android:id="@+id/btn_write"
