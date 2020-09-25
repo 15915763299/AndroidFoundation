@@ -149,6 +149,8 @@ public class WorkFragment extends LazyFragment {
 
     @Override
     protected void onFragmentResume() {
+        tx.setText("加载资源");
+        tx.setTextColor(0xffdddddd);
         logE("加载资源");
         logInFrag("加载资源");
         getData();
@@ -156,6 +158,8 @@ public class WorkFragment extends LazyFragment {
 
     @Override
     protected void onFragmentPause() {
+        tx.setText("释放资源");
+        tx.setTextColor(0xff555555);
         logE("释放资源");
         logInFrag("释放资源");
         releaseGet();
