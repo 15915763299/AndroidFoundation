@@ -24,7 +24,7 @@ Android中常见的多线程的使用方式，并对一些常见线程类做了�
 完全懒加载，Fragment显示时加载资源，隐藏时释放资源，使用分发机制解决嵌套ViewPager的Fragment的懒加载问题，
 使用FragmentStatePagerAdapter，适配两种模式（BEHAVIOR_SET_USER_VISIBLE_HINT与BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT）
 
-### 3、Net
+### 3、NetAndRxJava
 网络编程相关，简单的聊天室实现，UDP通讯简单实现，RxJava+OkHttp+Retrofit+DataBinding实现登录注册，
 自定义RxBus，十几种RxJava操作符分析，背压、冷热被观察者分析
 
