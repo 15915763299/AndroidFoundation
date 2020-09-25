@@ -1,6 +1,7 @@
 package com.demo.net.requestdemo.project;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +42,6 @@ public class ActGetProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.act_get_project);
         wanAndroidApi = WanAndroidRetrofit.get().create(WanAndroidApi.class);
-        retryWhen();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ActGetProject extends AppCompatActivity {
 //        );
 //    }
 
-    public void retryWhen() {
+    public void retryWhen(View view) {
         Observable<ProjectBean> observable = wanAndroidApi.getProject();
 
         // 步骤4：发送网络请求 & 通过retryWhen（）进行重试
@@ -157,5 +157,4 @@ public class ActGetProject extends AppCompatActivity {
                     }
                 });
     }
-
 }
