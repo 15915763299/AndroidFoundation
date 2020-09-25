@@ -5,6 +5,12 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="启动聊天室需要以下两步：\n1、需要在电脑中先启动ChatService。\n2、再配置SerConnector中的Host地址连接到电脑" />
+
     <EditText
         android:id="@+id/edt"
         android:layout_width="match_parent"

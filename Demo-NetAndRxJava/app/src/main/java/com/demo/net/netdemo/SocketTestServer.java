@@ -1,4 +1,4 @@
-package com.demo.net.test;
+package com.demo.net.netdemo;
 
 import java.io.BufferedReader;
 import java.io.IOException;

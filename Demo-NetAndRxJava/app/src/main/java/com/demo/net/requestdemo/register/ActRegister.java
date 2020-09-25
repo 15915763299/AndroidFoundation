@@ -111,6 +111,7 @@ public class ActRegister extends AppCompatActivity {
                         // 回到主线程
                         .observeOn(AndroidSchedulers.mainThread())
                         .doFinally(ProgressDialogUtil::dismiss)
+                        .doOnNext(baseResponse -> ProgressDialogUtil.dismiss())
                         .subscribe(
                                 this::onValidateCodeReceived,
                                 Throwable::printStackTrace
@@ -120,7 +121,7 @@ public class ActRegister extends AppCompatActivity {
         registerClick();
     }
 
-    private void registerClick(){
+    private void registerClick() {
         // 注册
         compositeDisposable.add(
                 // RxClickUtil 是自定义的，效果和下面这个类似，这是 jakewharton 的

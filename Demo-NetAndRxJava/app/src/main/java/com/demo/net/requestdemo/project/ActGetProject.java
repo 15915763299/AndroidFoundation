@@ -28,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author 尉迟涛
  * create time : 2020/3/7 17:23
- * description :
+ * description : 网络请求重试
  */
 public class ActGetProject extends AppCompatActivity {
 

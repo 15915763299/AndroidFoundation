@@ -1,4 +1,4 @@
-package com.demo.net.test;
+package com.demo.net.netdemo;
 
 import java.net.InetAddress;
 import java.util.Arrays;

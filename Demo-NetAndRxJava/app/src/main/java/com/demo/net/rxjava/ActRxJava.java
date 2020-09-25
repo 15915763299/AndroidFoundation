@@ -3,6 +3,7 @@ package com.demo.net.rxjava;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,11 +32,15 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
 
     private static final String TAG = ActRxJava.class.getSimpleName();
     private Disposable disposable;
+    private TextView txInfo;
+    private StringBuilder sb = new StringBuilder();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_rx_java);
+        txInfo = findViewById(R.id.tx_info);
+        findViewById(R.id.btn_clear).setOnClickListener(this);
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn3_1).setOnClickListener(this);
@@ -51,6 +56,10 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
             disposable.dispose();
         }
         switch (v.getId()) {
+            case R.id.btn_clear:
+                sb = new StringBuilder();
+                txInfo.setText("");
+                break;
             case R.id.btn1:
                 rxJavaDemo();
                 break;
@@ -76,55 +85,64 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    private void log(String info) {
+        sb.append(info).append("\n");
+        if (sb.length() > 999999) {
+            sb = new StringBuilder();
+            txInfo.setText("");
+            return;
+        }
+        String result = sb.toString();
+        Log.e(TAG, result);
+        runOnUiThread(() -> txInfo.setText(result));
+    }
+
     public void rxJavaDemo() {
         // 1. 创建一个被观察者
         Observable<String> observable = Observable.create((ObservableEmitter<String> emitter) -> {
-            Log.i(TAG, "subscribe: " + Thread.currentThread().getName());
+            log("subscribe thread: " + Thread.currentThread().getName());
             emitter.onNext("test1");
-//          emitter.onComplete();
+            //emitter.onComplete();
         });
 
         //2. 创建一个观察者
         Observer<String> observer = new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i(TAG, "onSubscribe: " + Thread.currentThread().getName());
-                Log.i(TAG, "onSubscribe: " + d);
+                log("onSubscribe thread: " + Thread.currentThread().getName());
             }
 
             @Override
             public void onNext(String str) {
-                Log.i(TAG, "onNext: " + Thread.currentThread().getName());
+                log("onNext thread: " + Thread.currentThread().getName());
 //                sleep(5_000);
-                Log.i(TAG, "onNext: " + str);
+                log("onNext: " + str);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.i(TAG, "onError: " + Thread.currentThread().getName());
-                Log.i(TAG, "onError: " + e.getMessage());
+                log("onError thread: " + Thread.currentThread().getName());
+                log("onError: " + e.getMessage());
             }
 
             @Override
             public void onComplete() {
-                Log.i(TAG, "onComplete: " + Thread.currentThread().getName());
-                Log.i(TAG, "onComplete: ");
+                log("onComplete thread: " + Thread.currentThread().getName());
             }
         };
-
 
 //        map(new Function<String, String>() {
 //            @Override
 //            public String apply(String s) throws Exception {
-//                Log.i(TAG, "subscribeOn上游: " + Thread.currentThread().getName());
+//                log("subscribeOn上游: " + Thread.currentThread().getName());
 //                return s + "map";
 //            }
 //        })
 
         observable
                 .map(s -> {
-                    Log.i(TAG, "subscribeOn上游apply: " + Thread.currentThread().getName());
-                    return s + "map";
+                    log("subscribeOn上游apply thread: " + Thread.currentThread().getName());
+                    return s + "-map";
                 })
                 // 都生效了，但是结果按第一次的执行
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -132,16 +150,16 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
                 .subscribeOn(Schedulers.newThread())
                 .subscribeOn(Schedulers.single())
                 .map(s -> {
-                    Log.i(TAG, "subscribeOn下游apply: " + Thread.currentThread().getName());
-                    return "1" + s;
+                    log("subscribeOn下游apply thread: " + Thread.currentThread().getName());
+                    return "1-" + s;
                 })
                 // 都生效了，但是结果按最后一次的执行(observeOn：onNext等，发生在指定线程，下游发生在指定线程)
                 .observeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.newThread())
                 .observeOn(Schedulers.io())
                 .map(s -> {
-                    Log.i(TAG, "observeOn下游apply: " + Thread.currentThread().getName());
-                    return "1" + s;
+                    log("observeOn下游apply thread: " + Thread.currentThread().getName());
+                    return "1-" + s;
                 })
                 // 订阅
                 .subscribe(observer);
@@ -164,7 +182,7 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
 
         disposable = Observable.just("test")
                 .map((String s) -> s + "map")
-                .subscribe((String s) -> Log.i(TAG, "s: " + s));
+                .subscribe((String s) -> log("s: " + s));
     }
 
     /**
@@ -184,8 +202,8 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((Integer integer) -> {
-                    Log.i(TAG, "call: " + integer);
+                .subscribe(i -> {
+                    log("call: " + i);
                     sleep(10);//背压出现
                 });
     }
@@ -224,7 +242,7 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(i -> {
-                    Log.i(TAG, "call: " + i);
+                    log("call: " + i);
                     sleep(10);
                 });
     }
@@ -243,7 +261,7 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
                 .observeOn(AndroidSchedulers.mainThread())
                 .sample(1, TimeUnit.SECONDS)
                 .subscribe(i -> {
-                    Log.i(TAG, "call: " + i);
+                    log("call: " + i);
                     sleep(10);
                 });
     }
@@ -280,7 +298,7 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
 
                     @Override
                     public void onNext(Integer integer) {
-                        Log.d(TAG, "onNext: " + integer);
+                        log("onNext: " + integer);
                         subscription.request(1);
                     }
 
@@ -291,7 +309,7 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
 
                     @Override
                     public void onComplete() {
-                        Log.d(TAG, "onComplete");
+                        log("onComplete");
                     }
                 });
     }
@@ -311,7 +329,6 @@ public class ActRxJava extends AppCompatActivity implements View.OnClickListener
         }
         super.onDestroy();
     }
-
 
 
 //    private static void flowabledemo() {

@@ -25,12 +25,18 @@
         android:layout_marginTop="15dp"
         android:text="自定义RxJBus" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="WanAndroid 注册/登录 API" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:orientation="horizontal">
 
@@ -38,8 +44,7 @@
             android:id="@+id/net1"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:text="注册" />
 
@@ -47,7 +52,6 @@
             android:id="@+id/net2"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:text="登录" />
     </LinearLayout>
